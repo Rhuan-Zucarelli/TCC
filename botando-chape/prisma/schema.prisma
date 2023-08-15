@@ -10,12 +10,36 @@ datasource db {
   url = env("DATABASE_URL")
   relationMode = "prisma"
 }
+model Food{ //para cada 100gm de alimentos
+  id                String  @id @default(cuid())
+  name String
+  calories Int
+  carbs Int
+  protein Int
+  fat Int
+  mealFoods MealFood[]
+}
 
+model Meal{
+  id                String  @id @default(cuid())
+  userId String
+  user              User    @relation(fields: [userId], references: [id])
+  mealType String
+  dateMeal String
+  mealFoods MealFood[]
+  
+  @@index([userId])
+}
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model MealFood{
+  id                String  @id @default(cuid())
+  mealId String
+  meal Meal @relation(fields: [mealId], references: [id])
+  foodId String
+  food Food @relation(fields: [foodId], references: [id])
+
+  @@index([mealId])
+  @@index([foodId])
 }
 
 // Necessary for Next auth
@@ -25,12 +49,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
+    refresh_token     String?  @db.Text
+    access_token      String?  @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? // @db.Text
+    id_token          String?  @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -53,6 +77,11 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    height        Int?
+    weight        Int?
+    age           Int?
+    targetWeight  Int?
+    meals Meal[]
 }
 
 model VerificationToken {
