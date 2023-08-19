@@ -5,7 +5,7 @@ import {
   protectedProcedure,
 } from "next/server/api/trpc";
 
-export const exampleRouter = createTRPCRouter({
+export const trainingRouter = createTRPCRouter({
   getMeals: protectedProcedure
     .query(({ctx}) => {
       return ctx.prisma.trainingDiary.findMany();

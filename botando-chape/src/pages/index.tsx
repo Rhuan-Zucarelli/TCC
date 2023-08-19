@@ -1,22 +1,17 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Login from "next/components/layout/login/Login";
+import Main from "next/components/layout/main/Main";
 import Head from "next/head";
 import Link from "next/link";
 import { api } from "next/utils/api";
 
 
 export default function Home() {
-
+  const { data: sessionData } = useSession();
   return (
     <>
-      <Login />
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-2xl text-white">
-        </p>
-        <AuthShowcase />
-      </div>
 
-
+      {sessionData ? <Main /> : <Login />}
     </>
   );
 }
