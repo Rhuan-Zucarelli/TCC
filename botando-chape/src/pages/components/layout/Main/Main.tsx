@@ -1,9 +1,12 @@
 import { useSession } from "next-auth/react";
+import { api } from "next/utils/api"
 import { signOut } from 'next-auth/react';
 
 
 export default function Main() {
-  const { data: sessionData } = useSession();
+  // const { data: sessionData } = useSession();
+  // const user = api.user.getUser.useQuery({ id: sessionData?.user.id })
+
 
   return (
     <>

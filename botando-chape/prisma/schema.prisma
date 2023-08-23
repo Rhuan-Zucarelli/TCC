@@ -2,127 +2,127 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 // valor de cada comida a cada 100 Gm´s de comida
 model Food {
-    id        String     @id @default(cuid())
-    name      String
-    calories  Int
-    carbs     Int
-    protein   Int
-    fat       Int
-    mealFoods MealFood[]
+  id        String     @id @default(cuid())
+  name      String
+  calories  Int
+  carbs     Int
+  protein   Int
+  fat       Int
+  mealFoods MealFood[]
 }
 
 model Meal {
-    id        String     @id @default(cuid())
-    userId    String
-    user      User       @relation(fields: [userId], references: [id])
-    mealType  String //qual a refeicao
-    dateMeal  String //qual o dia das refeicao
-    mealFoods MealFood[]
+  id        String     @id @default(cuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  mealType  String //qual a refeicao
+  dateMeal  String //qual o dia das refeicao
+  mealFoods MealFood[]
 
-    @@index([userId])
+  @@index([userId])
 }
 
 model MealFood {
-    id     String @id @default(cuid())
-    mealId String
-    meal   Meal   @relation(fields: [mealId], references: [id])
-    foodId String
-    food   Food   @relation(fields: [foodId], references: [id])
+  id     String @id @default(cuid())
+  mealId String
+  meal   Meal   @relation(fields: [mealId], references: [id])
+  foodId String
+  food   Food   @relation(fields: [foodId], references: [id])
 
-    @@index([mealId])
-    @@index([foodId])
+  @@index([mealId])
+  @@index([foodId])
 }
 
 model TrainingDiary {
-    id               String             @id @default(cuid())
-    userId           String
-    user             User               @relation(fields: [userId], references: [id])
-    trainingDay      String
-    ExerciseTraining ExerciseTraining[]
+  id               String             @id @default(cuid())
+  userId           String
+  user             User               @relation(fields: [userId], references: [id])
+  trainingDay      String
+  ExerciseTraining ExerciseTraining[]
 
-    @@index([userId])
+  @@index([userId])
 }
 
 //valor da queima de calorias colocar a cada 1 minuto de treino
 model Exercise {
-    id               String             @id @default(cuid())
-    name             String
-    burnCalories     Int
-    ExerciseTraining ExerciseTraining[]
+  id               String             @id @default(cuid())
+  name             String
+  burnCalories     Int
+  ExerciseTraining ExerciseTraining[]
 }
 
 model ExerciseTraining {
-    id         String        @id @default(cuid())
-    exerciseId String
-    exercise   Exercise      @relation(fields: [exerciseId], references: [id])
-    trainingId String
-    training   TrainingDiary @relation(fields: [trainingId], references: [id])
+  id         String        @id @default(cuid())
+  exerciseId String
+  exercise   Exercise      @relation(fields: [exerciseId], references: [id])
+  trainingId String
+  training   TrainingDiary @relation(fields: [trainingId], references: [id])
 
-    @@index([exerciseId])
-    @@index([trainingId])
+  @@index([exerciseId])
+  @@index([trainingId])
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
-    @@index([userId])
+  @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([userId])
+  @@index([userId])
 }
 
 model User {
-    id            String          @id @default(cuid())
-    name          String?
-    email         String?         @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    height        Int?
-    weight        Int?
-    age           Int?
-    targetWeight  Int?
-    meals         Meal[]
-    TrainingDiary TrainingDiary[]
+  id            String          @id @default(cuid())
+  name          String?
+  email         String?         @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  height        Int?
+  weight        Int?
+  age           Int?
+  targetWeight  Int?
+  meals         Meal[]
+  TrainingDiary TrainingDiary[]
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
