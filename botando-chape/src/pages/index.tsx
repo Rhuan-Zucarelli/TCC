@@ -1,6 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Main from "./components/layout/Main/Main";
-import Login from "./components/layout/Login/Login";
+import Login from "next/components/layout/login/Login";
 
 
 
@@ -9,7 +8,6 @@ export default function Home() {
   return (
     <>
 
-      {sessionData ? <Main /> : <Login />}
     </>
   );
 }
