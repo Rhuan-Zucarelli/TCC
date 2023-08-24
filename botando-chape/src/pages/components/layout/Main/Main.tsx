@@ -14,9 +14,15 @@ interface MainLayoutProps {
   children: ReactNode;
 }
 
+<<<<<<< HEAD:botando-chape/src/components/layout/main/Main.tsx
 export default function Main({ children }: MainLayoutProps) {
   const { data: sessionData } = useSession();
   const user = api.user.getUser.useQuery({ id: sessionData?.user.id })
+=======
+export default function Main() {
+  // const { data: sessionData } = useSession();
+  // const user = api.user.getUser.useQuery({ id: sessionData?.user.id })
+>>>>>>> main:botando-chape/src/pages/components/layout/Main/Main.tsx
 
   if (!sessionData) return <Login />
   return (
