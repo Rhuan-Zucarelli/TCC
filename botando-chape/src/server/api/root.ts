@@ -3,7 +3,7 @@ import { createTRPCRouter } from "next/server/api/trpc";
 import { exerciseRouter } from "./routers/exercise";
 import { foodRouter } from "./routers/food";
 import { mealRouter } from "./routers/meal";
-import { trainingRouter } from "./routers/training";
+import { trainingRouter } from "./routers/Training";
 import { userRouter } from "./routers/user";
 
 /**
