@@ -11,8 +11,8 @@ import { IoMdSettings } from "react-icons/Io";
 //import Logo from "../../../public/imgs/LOGO.png";
 
 export default function Main() {
-  const { data: sessionData } = useSession();
-  const user = api.user.getUser.useQuery({ id: sessionData?.user.id })
+  // const { data: sessionData } = useSession();
+  // const user = api.user.getUser.useQuery({ id: sessionData?.user.id })
 
   return (
     <div className="h-screen flex flex-col">
