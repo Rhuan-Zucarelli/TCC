@@ -26,21 +26,21 @@ export default function Main({ children }: MainLayoutProps) {
         <div className="flex flex-1">
           <aside className="w-32 bg-green-600 flex flex-col justify-center items-center">
             <nav className="mb-12">
-              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1">
+              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1 hover:scale-110 ">
                 <Link href="/">
                   <HiOutlineHome size={54} color="#fff" />
                 </Link>
               </button>
             </nav>
             <nav className="mb-12">
-              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1">
-                <a href="#">
+              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1 hover:scale-110 ">
+                <a href="/food">
                   <IoFastFoodOutline size={54} color="#fff" />
                 </a>
               </button>
             </nav>
             <nav className="mb-12">
-              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1">
+              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1 hover:scale-110 ">
                 <a href="#">
                   <CiDumbbell size={54} color="#fff" />
                 </a>
@@ -57,7 +57,7 @@ export default function Main({ children }: MainLayoutProps) {
             <nav className="mb-12 flex-grow flex flex-col justify-end items-center">
               <div className="flex-grow"></div>
               <img src="" className="w-32 h-auto mb-4" />
-              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1">
+              <button className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1 hover:scale-110 ">
                 <Link href="/configUser">
                   <PiGearSixBold size={54} color="#fff" />
                 </Link>
@@ -67,7 +67,7 @@ export default function Main({ children }: MainLayoutProps) {
             <nav className="mb-12 ">
               <div className="flex-grow"></div>
               <button
-                className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1"
+                className="cursor-pointer focus:outline-none hover:bg-gray-500 hover:bg-opacity-50 rounded-2xl p-1 hover:scale-110 "
                 onClick={() => signOut()}>
                 <BiExit size={54} color="#fff" />
               </button>
