@@ -54,10 +54,12 @@ export default function Main({ children }: MainLayoutProps) {
           </main>
 
           <aside className="flex w-32 flex-col items-center justify-center bg-green-600">
-
+            
             <nav className="mb-6">
               <div className="flex-grow"></div>
-              <img src="/imgs/LOGO.png" className="mb-4 mt-4 h-auto w-20" />
+              <a href="/" className="mb-4 mt-4">
+                <img src="/imgs/LOGO.png" className="mb-4 mt-4 h-auto w-20" />
+              </a>
             </nav>
 
             <nav className="mb-6 flex flex-grow flex-col items-center justify-end">
