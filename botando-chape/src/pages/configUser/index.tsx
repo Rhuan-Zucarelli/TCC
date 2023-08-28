@@ -33,7 +33,32 @@ export default function ConfigUser() {
       weight: user.data?.weight || 0,
       targetWeight: user.data?.targetWeight || 0,
     }));
-  }, [user.data])
+  }, [user.data]);
+
+  /*  const handleSubmit = async (e) => {
+     e.preventDefault();
+ 
+     try {
+       const validationResult = schema.safeParse(formData);
+       if (!validationResult.success) {
+         console.error('Form data is not valid:', validationResult.error);
+         return;
+       }
+ 
+       // Chama a rota trpc para atualizar o usuário
+       await api.user.updateUser({
+         userId: sessionData?.user.id,
+         ...formData,
+       });
+ 
+       // Realiza qualquer lógica adicional necessária após o envio
+ 
+       console.log('Dados atualizados com sucesso!');
+     } catch (error) {
+       console.error('Erro ao atualizar os dados:', error);
+       // Trate o erro conforme necessário
+     }
+   }; */
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">Formulário</h1>
