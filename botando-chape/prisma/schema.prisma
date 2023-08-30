@@ -27,7 +27,7 @@ model Meal {
   userId    String
   user      User       @relation(fields: [userId], references: [id])
   mealType  String //qual a refeicao
-  dateMeal  String //qual o dia das refeicao
+  dateMeal  DateTime //qual o dia das refeicao 
   mealFoods MealFood[]
 
   @@index([userId])

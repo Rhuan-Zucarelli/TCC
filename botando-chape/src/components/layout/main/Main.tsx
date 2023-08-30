@@ -10,6 +10,7 @@ import { api } from "next/utils/api"
 import { signOut } from 'next-auth/react';
 import Login from "../login/Login";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -18,6 +19,11 @@ interface MainLayoutProps {
 export default function Main({ children }: MainLayoutProps) {
   const { data: sessionData } = useSession();
   const user = api.user.getUser.useQuery({ id: sessionData?.user.id })
+  const router = useRouter()
+  const logOut = async () => {
+    await router.push('/')
+    signOut()
+  }
 
   if (!sessionData) return <Login />
   return (
@@ -75,7 +81,7 @@ export default function Main({ children }: MainLayoutProps) {
               <div className="flex-grow"></div>
               <button
                 className="cursor-pointer focus:outline-none hover:bg-green-700 hover:bg-opacity-50 rounded-2xl p-1 hover:scale-110 "
-                onClick={() => signOut()}>
+                onClick={() => logOut()}>
                 <BiExit size={54} color="#fff" />
               </button>
             </nav>

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { PiSunHorizon } from 'react-icons/Pi';
 import { PiSunDim } from 'react-icons/Pi';
 import { PiMoonStarsLight } from 'react-icons/Pi';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 export default function Food() {
@@ -12,12 +14,18 @@ export default function Food() {
   const [openDinner, setOpenDinner] = useState(true);
   const [openRegisFood, setOpenRegisFood] = useState(true);
   const [openListFood, setOpenListFood] = useState(true);
-
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
 
   return (
     <>
       <div className="flex items-center justify-center h-screen">
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          className="border p-2 rounded-lg mt-4"
+          dateFormat="dd/MM/yyyy"
+        />
         <div className="flex flex-col space-y-4">
           <button
             className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white  px-4 py-2 rounded-2xl p-1 flex items-center"
@@ -26,7 +34,7 @@ export default function Food() {
             <PiSunHorizon size={30} color='#fff' />
             <span className="ml-2">Café da manhã</span>
           </button>
-          <Modal isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)}>
+          <Modal /* type={BreackFast} */ isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)}>
 
           </Modal>
 
@@ -56,18 +64,18 @@ export default function Food() {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 p-4 flex justify-center">
-        <button 
-        className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 mr-4"
-        onClick={() => setOpenRegisFood(!openRegisFood)}
+        <button
+          className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 mr-4"
+          onClick={() => setOpenRegisFood(!openRegisFood)}
         >
           Cadastro de comidas
         </button>
         <Modal isOpen={openRegisFood} onClose={() => setOpenRegisFood(!openRegisFood)}>
 
         </Modal>
-        <button 
-        className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
-        onClick={() => setOpenListFood(!openListFood)}
+        <button
+          className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
+          onClick={() => setOpenListFood(!openListFood)}
         >
           Lista de comidas cadastradas
         </button>
@@ -80,4 +88,3 @@ export default function Food() {
   );
 };
 
- 

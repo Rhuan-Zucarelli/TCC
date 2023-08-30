@@ -5,7 +5,6 @@ import { api } from 'next/utils/api';
 import { useEffect } from 'react';
 
 const schema = z.object({
-  userId: z.string(),
   age: z.number(),
   gender: z.string(),
   height: z.number(),
@@ -16,6 +15,7 @@ const schema = z.object({
 export default function ConfigUser() {
   const { data: sessionData } = useSession();
   const user = api.user.getUser.useQuery({ id: sessionData?.user.id });
+  const updateUser = api.user.updateUser.useMutation();
 
   const [formData, setFormData] = useState({
     age: user.data?.age || 0,
@@ -35,34 +35,35 @@ export default function ConfigUser() {
     }));
   }, [user.data]);
 
-  /*  const handleSubmit = async (e) => {
-     e.preventDefault();
- 
-     try {
-       const validationResult = schema.safeParse(formData);
-       if (!validationResult.success) {
-         console.error('Form data is not valid:', validationResult.error);
-         return;
-       }
- 
-       // Chama a rota trpc para atualizar o usuário
-       await api.user.updateUser({
-         userId: sessionData?.user.id,
-         ...formData,
-       });
- 
-       // Realiza qualquer lógica adicional necessária após o envio
- 
-       console.log('Dados atualizados com sucesso!');
-     } catch (error) {
-       console.error('Erro ao atualizar os dados:', error);
-       // Trate o erro conforme necessário
-     }
-   }; */
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const validationResult = schema.safeParse(formData);
+      if (!validationResult.success) {
+        console.error('Form data is not valid:', validationResult.error);
+        return;
+      }
+
+      if (!sessionData?.user.id) return
+      // Chama a rota trpc para atualizar o usuário
+      await updateUser.mutateAsync({
+        userId: sessionData?.user.id,
+        ...formData,
+      });
+
+      // Realiza qualquer lógica adicional necessária após o envio
+
+      console.log('Dados atualizados com sucesso!');
+    } catch (error) {
+      console.error('Erro ao atualizar os dados:', error);
+      // Trate o erro conforme necessário
+    }
+  };
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">Formulário</h1>
-      <form onSubmit={() => console.log(formData)}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="age" className="block mb-1">
             Idade:
