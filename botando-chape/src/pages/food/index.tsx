@@ -9,11 +9,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 export default function Food() {
-  const [openBreackFast, setOpenBreackFast] = useState(true);
-  const [openLunch, setOpenLunch] = useState(true);
-  const [openDinner, setOpenDinner] = useState(true);
-  const [openRegisFood, setOpenRegisFood] = useState(true);
-  const [openListFood, setOpenListFood] = useState(true);
+  const [openBreackFast, setOpenBreackFast] = useState(false);
+  const [openLunch, setOpenLunch] = useState(false);
+  const [openDinner, setOpenDinner] = useState(false);
+  const [openRegisFood, setOpenRegisFood] = useState(false);
+  const [openListFood, setOpenListFood] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
 
@@ -34,7 +34,7 @@ export default function Food() {
             <PiSunHorizon size={30} color='#fff' />
             <span className="ml-2">Café da manhã</span>
           </button>
-          <Modal /* type={BreackFast} */ isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)}>
+          <Modal /* type={BreackFast} */ isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -45,7 +45,7 @@ export default function Food() {
             <PiSunDim size={30} color='#fff' />
             <span className="ml-2">Almoço</span>
           </button>
-          <Modal isOpen={openLunch} onClose={() => setOpenLunch(!openLunch)}>
+          <Modal isOpen={openLunch} onClose={() => setOpenLunch(!openLunch)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -56,7 +56,7 @@ export default function Food() {
             <PiMoonStarsLight size={30} color='#fff' />
             <span className="ml-2">Jantar</span>
           </button>
-          <Modal isOpen={openDinner} onClose={() => setOpenDinner(!openDinner)}>
+          <Modal isOpen={openDinner} onClose={() => setOpenDinner(!openDinner)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -70,7 +70,7 @@ export default function Food() {
         >
           Cadastro de comidas
         </button>
-        <Modal isOpen={openRegisFood} onClose={() => setOpenRegisFood(!openRegisFood)}>
+        <Modal isOpen={openRegisFood} onClose={() => setOpenRegisFood(!openRegisFood)} button={{type:'BCreat', label:''}}>
 
         </Modal>
         <button
@@ -79,7 +79,7 @@ export default function Food() {
         >
           Lista de comidas cadastradas
         </button>
-        <Modal isOpen={openListFood} onClose={() => setOpenListFood(!openListFood)}>
+        <Modal isOpen={openListFood} onClose={() => setOpenListFood(!openListFood)} button={{type:'BList', label:''}}>
 
         </Modal>
       </div>

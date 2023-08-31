@@ -2,15 +2,15 @@ import { Modal } from 'next/components/layout/modal';
 import React, { useState } from 'react';
 
 export default function Training() {
-  const [openMonday, setOpenMonday] = useState(true);
-  const [openTuesday, setOpenTuesday] = useState(true);
-  const [openWednesday, setOpenWednesday] = useState(true);
-  const [openThursday, setOpenThursday] = useState(true);
-  const [openFriday, setOpenFriday] = useState(true);
-  const [openSaturday, setOpenSaturday] = useState(true);
-  const [openSunday, setOpenSunday] = useState(true);
-  const [openRegisTrain, setOpenRegisTrain] = useState(true);
-  const [openListTrain, setOpenListTrain] = useState(true);
+  const [openMonday, setOpenMonday] = useState(false);
+  const [openTuesday, setOpenTuesday] = useState(false);
+  const [openWednesday, setOpenWednesday] = useState(false);
+  const [openThursday, setOpenThursday] = useState(false);
+  const [openFriday, setOpenFriday] = useState(false);
+  const [openSaturday, setOpenSaturday] = useState(false);
+  const [openSunday, setOpenSunday] = useState(false);
+  const [openRegisTrain, setOpenRegisTrain] = useState(false);
+  const [openListTrain, setOpenListTrain] = useState(false);
 
   return (
     <>
@@ -22,16 +22,18 @@ export default function Training() {
           >
             <span className="ml-2">Segunda-Feira </span>
           </button>
-          <Modal isOpen={openMonday} onClose={() => setOpenMonday(!openMonday)}>
+          <Modal isOpen={openMonday} onClose={() => setOpenMonday(!openMonday)} button={{type:'BList', label:''}}>
 
           </Modal>
+
+          {/* botao={{ tipo: 'listagem', label: 'Lista de Exercícios cadastradas' */}
           <button
             className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 flex items-center"
             onClick={() => setOpenTuesday(!openTuesday)}
           >
             <span className="ml-2">Terça-Feira</span>
           </button>
-          <Modal isOpen={openTuesday} onClose={() => setOpenTuesday(!openTuesday)}>
+          <Modal isOpen={openTuesday} onClose={() => setOpenTuesday(!openTuesday)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -41,7 +43,7 @@ export default function Training() {
           >
             <span className="ml-2">Quarta-Feira</span>
           </button>
-          <Modal isOpen={openWednesday} onClose={() => setOpenWednesday(!openWednesday)}>
+          <Modal isOpen={openWednesday} onClose={() => setOpenWednesday(!openWednesday)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -51,7 +53,7 @@ export default function Training() {
           >
             <span className="ml-2">Quinta-Feira</span>
           </button>
-          <Modal isOpen={openThursday} onClose={() => setOpenThursday(!openThursday)}>
+          <Modal isOpen={openThursday} onClose={() => setOpenThursday(!openThursday)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -61,7 +63,7 @@ export default function Training() {
           >
             <span className="ml-2">Sexta-Feira</span>
           </button>
-          <Modal isOpen={openFriday} onClose={() => setOpenFriday(!openFriday)}>
+          <Modal isOpen={openFriday} onClose={() => setOpenFriday(!openFriday)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -71,7 +73,7 @@ export default function Training() {
           >
             <span className="ml-2">Sabado</span>
           </button>
-          <Modal isOpen={openSaturday} onClose={() => setOpenSaturday(!openSaturday)}>
+          <Modal isOpen={openSaturday} onClose={() => setOpenSaturday(!openSaturday)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -81,7 +83,7 @@ export default function Training() {
           >
             <span className="ml-2">Domingo</span>
           </button>
-          <Modal isOpen={openSunday} onClose={() => setOpenSunday(!openSunday)}>
+          <Modal isOpen={openSunday} onClose={() => setOpenSunday(!openSunday)} button={{type:'BList', label:''}}>
 
           </Modal>
 
@@ -95,7 +97,7 @@ export default function Training() {
         >
           Cadastro de Exercícios
         </button>
-        <Modal isOpen={openRegisTrain} onClose={() => setOpenRegisTrain(!openRegisTrain)}>
+        <Modal isOpen={openRegisTrain} onClose={() => setOpenRegisTrain(!openRegisTrain)} button={{type:'BCreat', label:''}}>
 
         </Modal>
 
@@ -105,7 +107,7 @@ export default function Training() {
         >
           Lista de Exercícios cadastradas
         </button>
-        <Modal isOpen={openListTrain} onClose={() => setOpenListTrain(!openListTrain)}>
+        <Modal isOpen={openListTrain} onClose={() => setOpenListTrain(!openListTrain)} button={{type:'BList', label:''}}>
 
         </Modal>
 
