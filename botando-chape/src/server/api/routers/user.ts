@@ -26,14 +26,20 @@ export const userRouter = createTRPCRouter({
         age: z.number(),
         gender: z.string(),
         height: z.number(),
-        weigth: z.number(),
-        targetWeigth: z.number(),
+        weight: z.number(),
+        targetWeight: z.number(),
       })
     )
     .mutation(({ input, ctx }) => {
       return ctx.prisma.user.update({
         where: { id: input.userId },
-        data: input,
+        data: {
+          age: input.age,
+          gender: input.gender,
+          height: input.height,
+          weight: input.weight,
+          targetWeight: input.targetWeight,
+        },
       });
     }),
 });
