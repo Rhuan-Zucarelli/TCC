@@ -22,7 +22,7 @@ export default function Training() {
           >
             <span className="ml-2">Segunda-Feira </span>
           </button>
-          <Modal isOpen={openMonday} onClose={() => setOpenMonday(!openMonday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openMonday} onClose={() => setOpenMonday(!openMonday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -33,7 +33,7 @@ export default function Training() {
           >
             <span className="ml-2">Terça-Feira</span>
           </button>
-          <Modal isOpen={openTuesday} onClose={() => setOpenTuesday(!openTuesday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openTuesday} onClose={() => setOpenTuesday(!openTuesday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -43,7 +43,7 @@ export default function Training() {
           >
             <span className="ml-2">Quarta-Feira</span>
           </button>
-          <Modal isOpen={openWednesday} onClose={() => setOpenWednesday(!openWednesday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openWednesday} onClose={() => setOpenWednesday(!openWednesday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -53,7 +53,7 @@ export default function Training() {
           >
             <span className="ml-2">Quinta-Feira</span>
           </button>
-          <Modal isOpen={openThursday} onClose={() => setOpenThursday(!openThursday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openThursday} onClose={() => setOpenThursday(!openThursday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -63,7 +63,7 @@ export default function Training() {
           >
             <span className="ml-2">Sexta-Feira</span>
           </button>
-          <Modal isOpen={openFriday} onClose={() => setOpenFriday(!openFriday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openFriday} onClose={() => setOpenFriday(!openFriday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -73,7 +73,7 @@ export default function Training() {
           >
             <span className="ml-2">Sabado</span>
           </button>
-          <Modal isOpen={openSaturday} onClose={() => setOpenSaturday(!openSaturday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openSaturday} onClose={() => setOpenSaturday(!openSaturday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -83,7 +83,7 @@ export default function Training() {
           >
             <span className="ml-2">Domingo</span>
           </button>
-          <Modal isOpen={openSunday} onClose={() => setOpenSunday(!openSunday)} button={{type:'BList', label:''}}>
+          <Modal isOpen={openSunday} onClose={() => setOpenSunday(!openSunday)} button={{ type: 'BList', label: '' }}>
 
           </Modal>
 
@@ -97,7 +97,7 @@ export default function Training() {
         >
           Cadastro de Exercícios
         </button>
-        <Modal isOpen={openRegisTrain} onClose={() => setOpenRegisTrain(!openRegisTrain)} button={{type:'BCreat', label:''}}>
+        <Modal isOpen={openRegisTrain} onClose={() => setOpenRegisTrain(!openRegisTrain)} button={{ type: 'BCreatExercise', label: '' }}>
 
         </Modal>
 
@@ -107,7 +107,7 @@ export default function Training() {
         >
           Lista de Exercícios cadastradas
         </button>
-        <Modal isOpen={openListTrain} onClose={() => setOpenListTrain(!openListTrain)} button={{type:'BList', label:''}}>
+        <Modal isOpen={openListTrain} onClose={() => setOpenListTrain(!openListTrain)} button={{ type: 'BList', label: '' }}>
 
         </Modal>
 
