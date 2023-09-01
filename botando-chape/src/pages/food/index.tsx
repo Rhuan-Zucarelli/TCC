@@ -19,23 +19,23 @@ export default function Food() {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen mb-4">
         <DatePicker
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
           className="border p-2 rounded-lg mt-4"
           dateFormat="dd/MM/yyyy"
         />
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 mt-4">
           <button
-            className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white  px-4 py-2 rounded-2xl p-1 flex items-center"
+            className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 flex items-center"
             onClick={() => setOpenBreackFast(!openBreackFast)}
           >
             <PiSunHorizon size={30} color='#fff' />
             <span className="ml-2">Café da manhã</span>
           </button>
           <Modal /* type={BreackFast} */ isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)} button={{ type: 'BList', label: '' }}>
-
+            {/* Conteúdo do modal */}
           </Modal>
 
           <button
@@ -46,7 +46,7 @@ export default function Food() {
             <span className="ml-2">Almoço</span>
           </button>
           <Modal isOpen={openLunch} onClose={() => setOpenLunch(!openLunch)} button={{ type: 'BList', label: '' }}>
-
+            {/* Conteúdo do modal */}
           </Modal>
 
           <button
@@ -57,9 +57,8 @@ export default function Food() {
             <span className="ml-2">Jantar</span>
           </button>
           <Modal isOpen={openDinner} onClose={() => setOpenDinner(!openDinner)} button={{ type: 'BList', label: '' }}>
-
+            {/* Conteúdo do modal */}
           </Modal>
-
         </div>
       </div>
 
@@ -77,7 +76,7 @@ export default function Food() {
           className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
           onClick={() => setOpenListFood(!openListFood)}
         >
-          Lista de comidas cadastradas
+          Lista de comidas
         </button>
         <Modal isOpen={openListFood} onClose={() => setOpenListFood(!openListFood)} button={{ type: 'BList', label: '' }}>
 

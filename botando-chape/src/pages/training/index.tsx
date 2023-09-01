@@ -105,7 +105,7 @@ export default function Training() {
           className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
           onClick={() => setOpenListTrain(!openListTrain)}
         >
-          Lista de Exercícios cadastradas
+          Lista de Exercícios 
         </button>
         <Modal isOpen={openListTrain} onClose={() => setOpenListTrain(!openListTrain)} button={{ type: 'BList', label: '' }}>
 

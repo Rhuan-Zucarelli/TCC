@@ -1,3 +1,5 @@
+import CreateExercise from 'next/components/createExercise/CreateExercise';
+import CreateFood from 'next/components/createFood/CreateFood';
 import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 
@@ -33,27 +35,13 @@ export function Modal({ isOpen, onClose, children, button }: Imodal) {
   if (button.type === 'BCreatExercise') {
     buttonContent = (
       <>
-        <form className='flex gap-2'>
-          <label></label>
-          <div className='mt-4'>
-            <input
-              className='flex-grow px-3 py-2 border rounded-md'
-            />
-          </div>
-        </form>
+        <CreateExercise />
       </>
     );
   } if (button.type === 'BCreatFood') {
     buttonContent = (
       <>
-        <form className='flex gap-2'>
-          <label>BCreatFood</label>
-          <div className='mt-4'>
-            <input
-              className='flex-grow px-3 py-2 border rounded-md'
-            />
-          </div>
-        </form>
+       <CreateFood />
       </>
     );
   }
