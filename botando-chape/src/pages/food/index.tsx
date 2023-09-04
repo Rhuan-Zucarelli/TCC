@@ -34,8 +34,8 @@ export default function Food() {
             <PiSunHorizon size={30} color='#fff' />
             <span className="ml-2">Café da manhã</span>
           </button>
-          <Modal /* type={BreackFast} */ isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)} button={{ type: 'BList', label: '' }}>
-            {/* Conteúdo do modal */}
+          <Modal isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)} button={{ type: 'BList', label: '' }}>
+            
           </Modal>
 
           <button

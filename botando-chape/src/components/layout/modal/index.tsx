@@ -1,7 +1,8 @@
-import CreateExercise from 'next/components/createExercise/CreateExercise';
-import CreateFood from 'next/components/createFood/CreateFood';
+
 import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import CreateExercise from '../createExercise/CreateExercise';
+import CreateFood from '../createFood/CreateFood';
 
 interface Imodal {
   isOpen: boolean;
@@ -41,7 +42,7 @@ export function Modal({ isOpen, onClose, children, button }: Imodal) {
   } if (button.type === 'BCreatFood') {
     buttonContent = (
       <>
-       <CreateFood />
+        <CreateFood onClose={onClose}/>
       </>
     );
   }
