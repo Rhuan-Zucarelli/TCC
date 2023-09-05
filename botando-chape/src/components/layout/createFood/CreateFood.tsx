@@ -31,7 +31,7 @@ export default function CreateFood({ onClose }: { onClose: () => void }) {
 		setForm(formInicialState)
 		onClose()
 	}
-	const getFoods = api.food.getFoods.useQuery();
+
 
 
 	return (

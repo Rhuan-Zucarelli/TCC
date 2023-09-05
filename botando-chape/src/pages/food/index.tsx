@@ -8,14 +8,30 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
+type StateType = {
+  openBreackFast: boolean,
+  openLunch: boolean,
+  openDinner: boolean,
+  openRegisFood: boolean,
+  openListFood: boolean,
+}
+
 export default function Food() {
-  const [openBreackFast, setOpenBreackFast] = useState(false);
-  const [openLunch, setOpenLunch] = useState(false);
-  const [openDinner, setOpenDinner] = useState(false);
-  const [openRegisFood, setOpenRegisFood] = useState(false);
-  const [openListFood, setOpenListFood] = useState(false);
+  const [state, setState] = useState<StateType>({
+    openBreackFast: false,
+    openLunch: false,
+    openDinner: false,
+    openRegisFood: false,
+    openListFood: false,
+  })
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
+  const toggleState = (key: keyof StateType) => {
+    setState((prevState) => ({
+      ...prevState,
+      [key]: !prevState[key],
+    }));
+  };
 
   return (
     <>
@@ -29,35 +45,35 @@ export default function Food() {
         <div className="flex flex-col space-y-4 mt-4">
           <button
             className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 flex items-center"
-            onClick={() => setOpenBreackFast(!openBreackFast)}
+            onClick={() => toggleState('openBreackFast')}
           >
             <PiSunHorizon size={30} color='#fff' />
             <span className="ml-2">Café da manhã</span>
           </button>
-          <Modal isOpen={openBreackFast} onClose={() => setOpenBreackFast(!openBreackFast)} button={{ type: 'BList', label: '' }}>
-            
+          <Modal isOpen={state.openBreackFast} onClose={() => toggleState('openBreackFast')} button={{ type: 'BList', label: '' }}>
+
           </Modal>
 
           <button
             className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 flex items-center"
-            onClick={() => setOpenLunch(!openLunch)}
+            onClick={() => toggleState('openLunch')}
           >
             <PiSunDim size={30} color='#fff' />
             <span className="ml-2">Almoço</span>
           </button>
-          <Modal isOpen={openLunch} onClose={() => setOpenLunch(!openLunch)} button={{ type: 'BList', label: '' }}>
-            {/* Conteúdo do modal */}
+          <Modal isOpen={state.openLunch} onClose={() => toggleState('openLunch')} button={{ type: 'BList', label: '' }}>
+
           </Modal>
 
           <button
             className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 flex items-center "
-            onClick={() => setOpenDinner(!openDinner)}
+            onClick={() => toggleState('openDinner')}
           >
             <PiMoonStarsLight size={30} color='#fff' />
             <span className="ml-2">Jantar</span>
           </button>
-          <Modal isOpen={openDinner} onClose={() => setOpenDinner(!openDinner)} button={{ type: 'BList', label: '' }}>
-            {/* Conteúdo do modal */}
+          <Modal isOpen={state.openDinner} onClose={() => toggleState('openDinner')} button={{ type: 'BList', label: '' }}>
+
           </Modal>
         </div>
       </div>
@@ -65,20 +81,20 @@ export default function Food() {
       <div className="fixed bottom-0 left-0 right-0 p-4 flex justify-center">
         <button
           className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 mr-4"
-          onClick={() => setOpenRegisFood(!openRegisFood)}
+          onClick={() => toggleState('openRegisFood')}
         >
           Cadastro de comidas
         </button>
-        <Modal isOpen={openRegisFood} onClose={() => setOpenRegisFood(!openRegisFood)} button={{ type: 'BCreatFood', label: '' }}>
+        <Modal isOpen={state.openRegisFood} onClose={() => toggleState('openRegisFood')} button={{ type: 'BCreatFood', label: '' }}>
 
         </Modal>
         <button
           className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
-          onClick={() => setOpenListFood(!openListFood)}
+          onClick={() => toggleState('openListFood')}
         >
           Lista de comidas
         </button>
-        <Modal isOpen={openListFood} onClose={() => setOpenListFood(!openListFood)} button={{ type: 'BList', label: '' }}>
+        <Modal isOpen={state.openListFood} onClose={() => toggleState('openListFood')} button={{ type: 'BList', label: '' }}>
 
         </Modal>
       </div>

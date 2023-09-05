@@ -36,13 +36,13 @@ export function Modal({ isOpen, onClose, children, button }: Imodal) {
   if (button.type === 'BCreatExercise') {
     buttonContent = (
       <>
-        <CreateExercise />
+        <CreateExercise onClose={onClose} />
       </>
     );
   } if (button.type === 'BCreatFood') {
     buttonContent = (
       <>
-        <CreateFood onClose={onClose}/>
+        <CreateFood onClose={onClose} />
       </>
     );
   }
