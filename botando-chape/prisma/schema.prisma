@@ -20,6 +20,8 @@ model Food {
   protein   Int
   fat       Int
   mealFoods MealFood[]
+  userId    String
+  createdBy User       @relation(fields: [userId], references: [id])
 }
 
 model Meal {
@@ -60,6 +62,8 @@ model Exercise {
   name             String
   burnCalories     Int
   ExerciseTraining ExerciseTraining[]
+  userId           String
+  createdBy        User               @relation(fields: [userId], references: [id])
 }
 
 model ExerciseTraining {
@@ -118,6 +122,8 @@ model User {
   targetWeight  Int?
   meals         Meal[]
   TrainingDiary TrainingDiary[]
+  Exercise      Exercise[]
+  Food          Food[]
 }
 
 model VerificationToken {
