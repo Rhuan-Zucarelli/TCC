@@ -7,7 +7,7 @@ import {
 
 export const foodRouter = createTRPCRouter({
   getFoods: protectedProcedure
-    .query(({ctx}) => {
+    .query(({ ctx }) => {
       return ctx.prisma.food.findMany();
     }),
 
@@ -17,7 +17,7 @@ export const foodRouter = createTRPCRouter({
     carbs: z.number(),
     protein: z.number(),
     fat: z.number(),
-  })).mutation(({input, ctx})=>{
+  })).mutation(({ input, ctx }) => {
     return ctx.prisma.food.create({
       data: input
     });
@@ -30,18 +30,18 @@ export const foodRouter = createTRPCRouter({
     carbs: z.number(),
     protein: z.number(),
     fat: z.number(),
-  })).mutation(({input, ctx})=>{
+  })).mutation(({ input, ctx }) => {
     return ctx.prisma.food.update({
-      where: {id:input.id},
+      where: { id: input.id },
       data: input
     })
   }),
 
   deleteFood: protectedProcedure.input(z.object({
-    id:z.string(),
-  })).mutation(({input, ctx})=>{
+    id: z.string(),
+  })).mutation(({ input, ctx }) => {
     return ctx.prisma.food.delete({
-      where: {id:input.id}
+      where: { id: input.id }
     })
   }),
 });
