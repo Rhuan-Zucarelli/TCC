@@ -1,4 +1,4 @@
-import { Modal } from 'next/components/layout/modal';
+import { Modal } from 'next/components/UI/modal';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { PiSunHorizon } from 'react-icons/Pi';
@@ -6,6 +6,7 @@ import { PiSunDim } from 'react-icons/Pi';
 import { PiMoonStarsLight } from 'react-icons/Pi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ListFood from 'next/components/UI/listFood/ListFood';
 
 
 type StateType = {
@@ -95,7 +96,7 @@ export default function Food() {
           Lista de comidas
         </button>
         <Modal isOpen={state.openListFood} onClose={() => toggleState('openListFood')} button={{ type: 'BList', label: '' }}>
-
+          <ListFood />
         </Modal>
       </div>
 

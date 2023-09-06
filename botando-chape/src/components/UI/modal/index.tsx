@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import CreateExercise from '../createExercise/CreateExercise';
@@ -39,7 +38,8 @@ export function Modal({ isOpen, onClose, children, button }: Imodal) {
         <CreateExercise onClose={onClose} />
       </>
     );
-  } if (button.type === 'BCreatFood') {
+  }
+  if (button.type === 'BCreatFood') {
     buttonContent = (
       <>
         <CreateFood onClose={onClose} />
