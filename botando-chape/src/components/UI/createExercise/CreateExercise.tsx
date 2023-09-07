@@ -19,10 +19,11 @@ export default function CreateExercise({ onClose }: { onClose: () => void }) {
 	const [form, setForm] = useState(
 		formInicialState
 	)
+	const { data: sessionData } = useSession()
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		await createExercise.mutateAsync(form)
+		await createExercise.mutateAsync({ ...form, userId: sessionData?.user.id })
 		setForm(formInicialState)
 		onClose()
 	}

@@ -1,4 +1,4 @@
-import { Modal } from 'next/components/UI/modal';
+import { Modal } from 'next/components/UI/modal/Modal';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { PiSunHorizon } from 'react-icons/Pi';

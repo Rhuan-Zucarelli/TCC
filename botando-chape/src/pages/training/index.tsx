@@ -1,4 +1,6 @@
-import { Modal } from 'next/components/UI/modal';
+import CreateExercise from 'next/components/UI/createExercise/CreateExercise';
+import ListExercises from 'next/components/UI/listExercise/ListExercise';
+import { Modal } from 'next/components/UI/modal/Modal';
 import React, { useState } from 'react';
 
 type StateType = {
@@ -43,8 +45,8 @@ export default function Training() {
           >
             <span className="ml-2">Segunda-Feira </span>
           </button>
-          <Modal isOpen={state.openMonday} onClose={() => toggleState('openMonday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openMonday} onClose={() => toggleState('openMonday')}>
+            <ListExercises type="" />
           </Modal>
 
           <button
@@ -53,8 +55,8 @@ export default function Training() {
           >
             <span className="ml-2">Terça-Feira </span>
           </button>
-          <Modal isOpen={state.openTuesday} onClose={() => toggleState('openTuesday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openTuesday} onClose={() => toggleState('openTuesday')}>
+            <ListExercises type="" />
           </Modal>
 
           <button
@@ -63,8 +65,8 @@ export default function Training() {
           >
             <span className="ml-2">Quarta-Feira </span>
           </button>
-          <Modal isOpen={state.openWednesday} onClose={() => toggleState('openWednesday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openWednesday} onClose={() => toggleState('openWednesday')} >
+            <ListExercises type="" />
           </Modal>
 
           <button
@@ -73,8 +75,8 @@ export default function Training() {
           >
             <span className="ml-2">Quinta-Feira </span>
           </button>
-          <Modal isOpen={state.openThursday} onClose={() => toggleState('openThursday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openThursday} onClose={() => toggleState('openThursday')} >
+            <ListExercises type="" />
           </Modal>
 
           <button
@@ -83,8 +85,8 @@ export default function Training() {
           >
             <span className="ml-2">Sexta-Feira </span>
           </button>
-          <Modal isOpen={state.openFriday} onClose={() => toggleState('openFriday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openFriday} onClose={() => toggleState('openFriday')} >
+            <ListExercises type="" />
           </Modal>
 
           <button
@@ -93,8 +95,8 @@ export default function Training() {
           >
             <span className="ml-2">Sabado </span>
           </button>
-          <Modal isOpen={state.openSaturday} onClose={() => toggleState('openSaturday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openSaturday} onClose={() => toggleState('openSaturday')} >
+            <ListExercises type="" />
           </Modal>
 
           <button
@@ -103,8 +105,8 @@ export default function Training() {
           >
             <span className="ml-2">Domingo </span>
           </button>
-          <Modal isOpen={state.openSunday} onClose={() => toggleState('openSunday')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openSunday} onClose={() => toggleState('openSunday')} >
+            <ListExercises type="" />
           </Modal>
         </div>
       </div>
@@ -116,8 +118,8 @@ export default function Training() {
         >
           Cadastro de Exercícios
         </button>
-        <Modal isOpen={state.openRegisTrain} onClose={() => toggleState('openRegisTrain')} button={{ type: 'BCreatExercise', label: '' }}>
-
+        <Modal isOpen={state.openRegisTrain} onClose={() => toggleState('openRegisTrain')} >
+          <CreateExercise onClose={() => toggleState('openRegisTrain')} />
         </Modal>
 
         <button
@@ -126,8 +128,8 @@ export default function Training() {
         >
           Lista de Exercícios
         </button>
-        <Modal isOpen={state.openListTrain} onClose={() => toggleState('openListTrain')} button={{ type: 'BList', label: '' }}>
-
+        <Modal isOpen={state.openListTrain} onClose={() => toggleState('openListTrain')}>
+          <ListExercises type="BCreatedBy" />
         </Modal>
 
       </div>
