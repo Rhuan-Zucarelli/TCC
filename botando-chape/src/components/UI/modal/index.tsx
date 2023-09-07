@@ -2,66 +2,17 @@ import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import CreateExercise from '../createExercise/CreateExercise';
 import CreateFood from '../createFood/CreateFood';
+import ListFood from '../listFood/ListFood';
 
 interface Imodal {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  button: bCreatFood | bCreatExercise | bList;
 }
 
-type bCreatExercise = {
-  type: 'BCreatExercise';
-  label: string;
-};
-
-type bCreatFood = {
-  type: 'BCreatFood';
-  label: string;
-};
-
-type bList = {
-  type: 'BList';
-  label: string;
-};
-
-export function Modal({ isOpen, onClose, children, button }: Imodal) {
+export function Modal({ isOpen, onClose, children, }: Imodal) {
   if (!isOpen) {
     return null;
-  }
-
-  let buttonContent;
-
-  if (button.type === 'BCreatExercise') {
-    buttonContent = (
-      <>
-        <CreateExercise onClose={onClose} />
-      </>
-    );
-  }
-  if (button.type === 'BCreatFood') {
-    buttonContent = (
-      <>
-        <CreateFood onClose={onClose} />
-      </>
-    );
-  }
-  if (button.type === 'BList') {
-    buttonContent = (
-      <>
-        <form className="flex gap-2">
-          <input
-            className="flex-grow px-3 py-2 border rounded-md"
-            placeholder="Buscar"
-          />
-          <button className="bg-gray-200 p-2 rounded-md">
-            <a>
-              <BiSearchAlt2 size={20} color="gray" />
-            </a>
-          </button>
-        </form>
-      </>
-    );
   }
 
   return (
@@ -70,8 +21,6 @@ export function Modal({ isOpen, onClose, children, button }: Imodal) {
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md">
 
           {children}
-
-          {buttonContent}
 
           <div className="mt-4">
             <button

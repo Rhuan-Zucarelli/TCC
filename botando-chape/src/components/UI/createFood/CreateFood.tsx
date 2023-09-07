@@ -30,7 +30,7 @@ export default function CreateFood({ onClose }: { onClose: () => void }) {
 		e.preventDefault();
 		await createFood.mutateAsync({ ...form, userId: sessionData?.user.id })
 		setForm(formInicialState)
-		onClose()
+		onClose();
 	}
 
 
