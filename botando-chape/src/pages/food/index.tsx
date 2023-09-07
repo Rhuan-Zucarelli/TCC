@@ -1,4 +1,4 @@
-import { Modal } from 'next/components/layout/modal';
+import { Modal } from 'next/components/UI/modal';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { PiSunHorizon } from 'react-icons/Pi';
@@ -6,6 +6,8 @@ import { PiSunDim } from 'react-icons/Pi';
 import { PiMoonStarsLight } from 'react-icons/Pi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ListFood from 'next/components/UI/listFood/ListFood';
+import CreateFood from 'next/components/UI/createFood/CreateFood';
 
 
 type StateType = {
@@ -50,8 +52,8 @@ export default function Food() {
             <PiSunHorizon size={30} color='#fff' />
             <span className="ml-2">Café da manhã</span>
           </button>
-          <Modal isOpen={state.openBreackFast} onClose={() => toggleState('openBreackFast')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openBreackFast} onClose={() => toggleState('openBreackFast')}>
+            <ListFood type="" />
           </Modal>
 
           <button
@@ -61,8 +63,8 @@ export default function Food() {
             <PiSunDim size={30} color='#fff' />
             <span className="ml-2">Almoço</span>
           </button>
-          <Modal isOpen={state.openLunch} onClose={() => toggleState('openLunch')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openLunch} onClose={() => toggleState('openLunch')} >
+            <ListFood type="" />
           </Modal>
 
           <button
@@ -72,8 +74,8 @@ export default function Food() {
             <PiMoonStarsLight size={30} color='#fff' />
             <span className="ml-2">Jantar</span>
           </button>
-          <Modal isOpen={state.openDinner} onClose={() => toggleState('openDinner')} button={{ type: 'BList', label: '' }}>
-
+          <Modal isOpen={state.openDinner} onClose={() => toggleState('openDinner')} >
+            <ListFood type="" />
           </Modal>
         </div>
       </div>
@@ -85,8 +87,8 @@ export default function Food() {
         >
           Cadastro de comidas
         </button>
-        <Modal isOpen={state.openRegisFood} onClose={() => toggleState('openRegisFood')} button={{ type: 'BCreatFood', label: '' }}>
-
+        <Modal isOpen={state.openRegisFood} onClose={() => toggleState('openRegisFood')}>
+          <CreateFood onClose={() => toggleState('openRegisFood')} />
         </Modal>
         <button
           className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
@@ -94,8 +96,8 @@ export default function Food() {
         >
           Lista de comidas
         </button>
-        <Modal isOpen={state.openListFood} onClose={() => toggleState('openListFood')} button={{ type: 'BList', label: '' }}>
-
+        <Modal isOpen={state.openListFood} onClose={() => toggleState('openListFood')} >
+          <ListFood type="BCreatedBy" />
         </Modal>
       </div>
 

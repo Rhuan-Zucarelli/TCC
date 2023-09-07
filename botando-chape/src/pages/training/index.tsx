@@ -1,4 +1,4 @@
-import { Modal } from 'next/components/layout/modal';
+import { Modal } from 'next/components/UI/modal';
 import React, { useState } from 'react';
 
 type StateType = {

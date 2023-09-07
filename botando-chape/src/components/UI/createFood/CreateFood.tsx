@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, use, useState } from 'react';
+import React, { useState } from 'react';
 import * as z from 'zod';
 import { useSession } from 'next-auth/react';
 import { api } from 'next/utils/api';
@@ -24,12 +24,13 @@ export default function CreateFood({ onClose }: { onClose: () => void }) {
 	const [form, setForm] = useState(
 		formInicialState
 	)
+	const { data: sessionData } = useSession()
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		await createFood.mutateAsync(form)
+		await createFood.mutateAsync({ ...form, userId: sessionData?.user.id })
 		setForm(formInicialState)
-		onClose()
+		onClose();
 	}
 
 
