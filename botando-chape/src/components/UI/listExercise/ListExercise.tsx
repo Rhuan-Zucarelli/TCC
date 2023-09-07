@@ -1,14 +1,14 @@
 import { useSession } from "next-auth/react";
 import { api } from "next/utils/api";
 
-interface IcreatedBy {
-  type: string;
-};
+interface Iexercise {
+  type: String;
+}
 
-export default function ListFood({ type }: IcreatedBy) {
+export default function ListExercises({ type }: Iexercise) {
   const { data: sessionData } = useSession();
-  const foods = api.food.getFoods.useQuery();
-  const userFoods = foods.data?.filter(food => food.userId === sessionData?.user.id)
+  const exercises = api.exercise.getExercises.useQuery();
+  const userExercises = exercises.data?.filter(exercise => exercise.userId === sessionData?.user.id);
 
   let listContent;
 
@@ -16,9 +16,9 @@ export default function ListFood({ type }: IcreatedBy) {
     listContent = (
       <>
         <div className="flex flex-col flex-wrap gap-4">
-          {userFoods?.map((food) => (
+          {userExercises?.map((exercise) => (
             <div>
-              {food.name}
+              {exercise.name}
             </div>
           ))}
         </div>
@@ -30,9 +30,9 @@ export default function ListFood({ type }: IcreatedBy) {
       <>
         <div className="flex flex-col flex-wrap gap-4">
           <div>
-            {foods.data?.map((food) => (
+            {exercises.data?.map((exercise) => (
               <div>
-                {food.name}
+                {exercise.name}
               </div>
             ))}
           </div>
@@ -46,5 +46,7 @@ export default function ListFood({ type }: IcreatedBy) {
       {listContent}
     </>
   )
-
 }
+
+
+
