@@ -10,6 +10,19 @@ export const exerciseRouter = createTRPCRouter({
     return ctx.prisma.exercise.findMany();
   }),
 
+  getById: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().optional(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      if (!input.id) return null;
+      return ctx.prisma.exercise.findUnique({
+        where: { id: input.id },
+      });
+    }),
+
   getExerciseByUser: protectedProcedure
     .input(
       z.object({
@@ -52,7 +65,7 @@ export const exerciseRouter = createTRPCRouter({
       });
     }),
 
-  deleteMeal: protectedProcedure
+  deleteExercises: protectedProcedure
     .input(
       z.object({
         id: z.string(),
