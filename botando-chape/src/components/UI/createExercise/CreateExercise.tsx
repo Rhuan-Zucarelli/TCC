@@ -19,7 +19,7 @@ const formInicialState = {
 interface Idetails {
 	type: string;
 	onClose: () => void;
-	id: string;
+	id?: string;
 };
 
 export default function CreateExercise({ type, onClose, id }: Idetails) {
@@ -27,6 +27,7 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 	const createExercise = api.exercise.createExercise.useMutation();
 	const updateExercise = api.exercise.updateExercise.useMutation();
 	const deleteExercise = api.exercise.deleteExercises.useMutation();
+	console.log(id, 'hgere')
 
 	const [form, setForm] = useState(
 		formInicialState
@@ -50,11 +51,13 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 	}
 	const handleSubmitUpdate = async (e: any) => {
 		e.preventDefault();
+		if(!id) return
 		await updateExercise.mutateAsync({ ...form, id })
 		setForm(formInicialState)
 	}
 	const handleSubmitDelete = async (e: any) => {
 		e.preventDefault();
+		if(!id) return 
 		await deleteExercise.mutateAsync({ ...form, id })
 		setForm(formInicialState)
 	}

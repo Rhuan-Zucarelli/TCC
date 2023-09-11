@@ -29,6 +29,7 @@ export default function Main({ children }: MainLayoutProps) {
   return (
     <div>
       <div className="h-screen flex flex-col">
+        <div className='text-black text-xl'> eu sou preto assumido</div>
         <div className="flex flex-1">
           <aside className="w-32 bg-green-600 flex flex-col justify-center items-center">
             <nav className="mb-12">

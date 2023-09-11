@@ -119,7 +119,7 @@ export default function Training() {
           Cadastro de Exercícios
         </button>
         <Modal isOpen={state.openRegisTrain} onClose={() => toggleState('openRegisTrain')} >
-          <CreateExercise type="" />
+          <CreateExercise type="" onClose={() => toggleState('openRegisTrain')}  />
         </Modal>
 
         <button
