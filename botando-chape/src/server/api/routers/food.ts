@@ -10,6 +10,19 @@ export const foodRouter = createTRPCRouter({
     return ctx.prisma.food.findMany();
   }),
 
+  getById: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().optional(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      if (!input.id) return null;
+      return ctx.prisma.food.findUnique({
+        where: { id: input.id },
+      });
+    }),
+
   getFoodByUser: protectedProcedure
     .input(
       z.object({
