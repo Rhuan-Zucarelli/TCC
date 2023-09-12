@@ -47,31 +47,30 @@ export default function ListExercises({ type }: Iexercise) {
               </button>
               <Modal isOpen={state.details === exercise.id} onClose={() => toggleState('details', '')}>
                 {state.details === exercise.id && (
-                  <CreateExercise type="Details" onClose={() => toggleState('details','')} id={exercise.id} />
+                  <CreateExercise type="Details" onClose={() => toggleState('details', '')} id={exercise.id} />
                 )}
               </Modal>
             </div>
           ))}
         </div>
-
       </>
     )
   }
 
   return (
     <>
-    <div className="border-t border-gray-300 py-2">
-      {exercises.data?.map((exercise) => (
-        <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
-          <p className="mr-2">{exercise.name}</p>
-          <button
-            className={`ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110`}>
-            <IoIosAddCircleOutline />
-          </button>
-        </div>
-      ))}
-    </div>
-  </>
+      <div className="border-t border-gray-300 py-2">
+        {exercises.data?.map((exercise) => (
+          <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
+            <p className="mr-2">{exercise.name}</p>
+            <button
+              className={`ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110`}>
+              <IoIosAddCircleOutline />
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 

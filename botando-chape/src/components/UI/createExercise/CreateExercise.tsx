@@ -5,6 +5,7 @@ import { api } from 'next/utils/api';
 import { useEffect } from 'react';
 import { BsArrowUpCircle } from 'react-icons/bs'
 import { MdDeleteOutline } from 'react-icons/md'
+import { GrSend } from 'react-icons/gr';
 
 const schema = z.object({
 	name: z.string(),
@@ -27,12 +28,12 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 	const createExercise = api.exercise.createExercise.useMutation();
 	const updateExercise = api.exercise.updateExercise.useMutation();
 	const deleteExercise = api.exercise.deleteExercises.useMutation();
-	console.log(id, 'hgere')
 
 	const [form, setForm] = useState(
 		formInicialState
 	)
 	const { data: sessionData } = useSession()
+
 	useEffect(() => {
 		if (!id) return
 		if (!exercise.data) return
@@ -51,13 +52,13 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 	}
 	const handleSubmitUpdate = async (e: any) => {
 		e.preventDefault();
-		if(!id) return
+		if (!id) return
 		await updateExercise.mutateAsync({ ...form, id })
 		setForm(formInicialState)
 	}
 	const handleSubmitDelete = async (e: any) => {
 		e.preventDefault();
-		if(!id) return 
+		if (!id) return
 		await deleteExercise.mutateAsync({ ...form, id })
 		setForm(formInicialState)
 	}
@@ -117,7 +118,7 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 		detailsContent = (
 			<>
 				<h2 className="text-2xl font-semibold mb-4">Cadastro de exercicio : </h2>
-				<form onSubmit={handleSubmitCreate}>
+				<form>
 					<div className="mb-4">
 						<label className="block text-sm font-medium text-gray-700">Nome </label>
 						<input type="text" id="name" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 p-2 w-full border rounded-md" />
@@ -126,8 +127,12 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 						<label className="block text-sm font-medium text-gray-700">Calorias Queimadas </label>
 						<input type="number" id="burnCalories" value={form.burnCalories} onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })} name="burnCalories" className="mt-1 p-2 w-full border rounded-md" />
 					</div>
-					<button type="submit" className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl flex items-center">
-						Enviar
+					<button
+						type="button"
+						onClick={handleSubmitCreate}
+						className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+					>
+						<GrSend />
 					</button>
 				</form >
 			</>
