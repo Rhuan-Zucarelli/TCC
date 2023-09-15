@@ -7,7 +7,7 @@ import {
 
 export const exerciseRouter = createTRPCRouter({
   getExercises: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.exercise.findMany();
+    return ctx.prisma.exercise.findMany({ where: { deletedAt: null } });
   }),
 
   getById: protectedProcedure
@@ -32,7 +32,7 @@ export const exerciseRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       if (!input.userId) return [];
       return ctx.prisma.exercise.findMany({
-        where: { createdBy: { id: input.userId } },
+        where: { createdBy: { id: input.userId }, deletedAt: null },
       });
     }),
 
@@ -72,7 +72,9 @@ export const exerciseRouter = createTRPCRouter({
       })
     )
     .mutation(({ input, ctx }) => {
-      return ctx.prisma.exercise.delete({
+      const data = new Date();
+      return ctx.prisma.exercise.update({
+        data: { deletedAt: data.toISOString() },
         where: { id: input.id },
       });
     }),

@@ -6,22 +6,27 @@ import { TbListDetails } from "react-icons/tb"
 import { IoIosAddCircleOutline } from "react-icons/io"
 import { Modal } from "../modal/Modal";
 import CreateExercise from "../createExercise/CreateExercise";
+import { TrainingDay } from "next/pages/training";
 
 interface Iexercise {
   type: String;
+  trainingDay?: keyof typeof TrainingDay;
 }
 
 interface StateType {
   details: boolean;
 };
 
-export default function ListExercises({ type }: Iexercise) {
+export default function ListExercises({ type, trainingDay }: Iexercise) {
   const { data: sessionData } = useSession();
   const exercises = api.exercise.getExercises.useQuery();
   const userExercises = exercises.data?.filter(exercise => exercise.userId === sessionData?.user.id);
   const [state, setState] = useState({
     details: '',
   })
+
+  const training = api.training.getTrainingExercises.useQuery({ userId: sessionData?.user.id, trainingDay });
+  console.log(training.data)
 
   const toggleState = (key: keyof StateType, id: string) => {
     setState((prevState) => ({
