@@ -13,6 +13,7 @@ interface Iexercise {
 
 interface StateType {
   details: boolean;
+  trainingDay: string;
 };
 
 export default function ListExercises({ type }: Iexercise) {

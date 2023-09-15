@@ -27,7 +27,6 @@ export default function Main({ children }: MainLayoutProps) {
 
   if (!sessionData) return <Login />
   return (
-    <div>
       <div className="h-screen flex flex-col">
         <div className="flex flex-1">
           <aside className="w-32 bg-green-600 flex flex-col justify-center items-center">
@@ -85,10 +84,8 @@ export default function Main({ children }: MainLayoutProps) {
                 <BiExit size={54} color="#fff" />
               </button>
             </nav>
-
           </aside>
         </div>
       </div>
-    </div>
   );
 }

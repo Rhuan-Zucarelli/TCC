@@ -14,6 +14,16 @@ type StateType = {
   openRegisTrain: boolean;
   openListTrain: boolean;
 };
+ 
+enum TrainingDay {
+  SEGUNDA= 'SEGUNDA',
+  TERCA= 'TERCA',
+  QUARTA= 'QUARTA',
+  QUINTA= 'QUINTA',
+  SEXTA= 'SEXTA',
+  SABADO= 'SABADO',
+  DOMINGO= 'DOMINGO',
+}
 
 export default function Training() {
   const [state, setState] = useState<StateType>({
@@ -46,7 +56,7 @@ export default function Training() {
             <span className="ml-2">Segunda-Feira </span>
           </button>
           <Modal isOpen={state.openMonday} onClose={() => toggleState('openMonday')}>
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.SEGUNDA} />
           </Modal>
 
           <button
@@ -56,7 +66,7 @@ export default function Training() {
             <span className="ml-2">Terça-Feira </span>
           </button>
           <Modal isOpen={state.openTuesday} onClose={() => toggleState('openTuesday')}>
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.TERCA} />
           </Modal>
 
           <button
@@ -66,7 +76,7 @@ export default function Training() {
             <span className="ml-2">Quarta-Feira </span>
           </button>
           <Modal isOpen={state.openWednesday} onClose={() => toggleState('openWednesday')} >
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.QUARTA} />
           </Modal>
 
           <button
@@ -76,7 +86,7 @@ export default function Training() {
             <span className="ml-2">Quinta-Feira </span>
           </button>
           <Modal isOpen={state.openThursday} onClose={() => toggleState('openThursday')} >
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.QUINTA} />
           </Modal>
 
           <button
@@ -86,7 +96,7 @@ export default function Training() {
             <span className="ml-2">Sexta-Feira </span>
           </button>
           <Modal isOpen={state.openFriday} onClose={() => toggleState('openFriday')} >
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.SEXTA} />
           </Modal>
 
           <button
@@ -96,7 +106,7 @@ export default function Training() {
             <span className="ml-2">Sabado </span>
           </button>
           <Modal isOpen={state.openSaturday} onClose={() => toggleState('openSaturday')} >
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.SABADO} />
           </Modal>
 
           <button
@@ -106,7 +116,7 @@ export default function Training() {
             <span className="ml-2">Domingo </span>
           </button>
           <Modal isOpen={state.openSunday} onClose={() => toggleState('openSunday')} >
-            <ListExercises type="" />
+            <ListExercises type={TrainingDay.DOMINGO} />
           </Modal>
         </div>
       </div>
