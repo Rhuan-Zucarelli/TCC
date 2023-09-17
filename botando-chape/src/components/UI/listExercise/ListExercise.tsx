@@ -65,7 +65,17 @@ export default function ListExercises({ type, trainingDay }: Iexercise) {
   return (
     <>
       <div className="border-t border-gray-300 py-2">
-        {exercises.data?.map((exercise) => (
+        {training.data?.trainingExercise.map((exercise) => (
+          <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
+            <p className="mr-2">{exercise.name}</p>
+            <button
+              onClick={ }
+              className={`ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110`}>
+              <IoIosAddCircleOutline />
+            </button>
+          </div>
+        ))}
+        {training.data?.restExercise.map((exercise) => (
           <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
             <p className="mr-2">{exercise.name}</p>
             <button

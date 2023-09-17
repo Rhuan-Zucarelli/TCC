@@ -4,7 +4,14 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "next/server/api/trpc";
-import { TrainingDay } from "next/pages/training";
+import { type TrainingDiary } from "@prisma/client";
+import { type Exercise } from "@prisma/client";
+
+interface TrainingExerciseResponse {
+  trainingExercise: Exercise[];
+  restExercise: Exercise[];
+  related: TrainingDiary;
+}
 
 export const trainingRouter = createTRPCRouter({
   getTraining: protectedProcedure.query(({ ctx }) => {
@@ -23,14 +30,41 @@ export const trainingRouter = createTRPCRouter({
       const training = await ctx.prisma.trainingDiary.findFirst({
         where: { userId: input.userId, trainingDay: input.trainingDay },
       });
-      if (training) return training;
-      return ctx.prisma.trainingDiary.create({
-        data: {
-          ...input,
-          userId: input.userId,
-          trainingDay: input.trainingDay,
-        },
+      if (!training) {
+        const newTraining = await ctx.prisma.trainingDiary.create({
+          data: {
+            ...input,
+            userId: input.userId,
+            trainingDay: input.trainingDay,
+          },
+        });
+        const restExercise = await ctx.prisma.exercise.findMany({});
+        return {
+          related: newTraining,
+          trainingExercise: [],
+          restExercise: restExercise,
+        } as TrainingExerciseResponse;
+      }
+      const trainingExercises = await ctx.prisma.exerciseTraining.findMany({
+        where: { trainingId: training.id }, // Filtra exercícios relacionados a este treino
       });
+      const exercises = await Promise.all(
+        trainingExercises.map(async (exercise) => {
+          const exerciseDetails = await ctx.prisma.exercise.findUnique({
+            where: { id: exercise.exerciseId },
+          });
+          return exerciseDetails;
+        })
+      );
+      const restExercise = await ctx.prisma.exercise.findMany({});
+      restExercise.filter((exercise) => {
+        const found = exercises.find((a) => a!.id === exercise.id);
+        if (!found) return true;
+      });
+      return {
+        restExercise: restExercise,
+        trainingExercise: exercises,
+      } as TrainingExerciseResponse;
     }),
 
   createTraining: protectedProcedure

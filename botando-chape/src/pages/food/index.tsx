@@ -37,7 +37,7 @@ export default function Food() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-screen mb-4">
+      <div className="flex flex-col items-center justify-center h-screen">
         <DatePicker
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
@@ -88,7 +88,7 @@ export default function Food() {
           Cadastro de comidas
         </button>
         <Modal isOpen={state.openRegisFood} onClose={() => toggleState('openRegisFood')}>
-          <CreateFood onClose={() => toggleState('openRegisFood')} />
+          <CreateFood type='' onClose={() => toggleState('openRegisFood')} id='' />
         </Modal>
         <button
           className="bg-green-600 hover:bg-green-700 hover:scale-110 text-white px-4 py-2 rounded-2xl p-1 "
