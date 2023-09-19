@@ -3,6 +3,7 @@ import * as z from 'zod';
 import { useSession } from 'next-auth/react';
 import { api } from 'next/utils/api';
 import { useEffect } from 'react';
+import { GrSend } from 'react-icons/gr';
 
 const schema = z.object({
   age: z.number(),
@@ -130,10 +131,10 @@ export default function ConfigUser() {
           />
         </div>
         <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          type="button"
+          className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
         >
-          Enviar
+          <GrSend />
         </button>
       </form>
     </div>
