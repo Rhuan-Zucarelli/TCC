@@ -20,6 +20,8 @@ interface StateType {
 export default function ListExercises({ type, trainingDay }: Iexercise) {
   const { data: sessionData } = useSession();
   const exercises = api.exercise.getExercises.useQuery();
+  const createExerciseTraining = api.training.createExerciseTraining.useMutation();
+  const deleteExerciseTraining = api.training.deleteExerciseTraining.useMutation();
   const userExercises = exercises.data?.filter(exercise => exercise.userId === sessionData?.user.id);
   const [state, setState] = useState({
     details: '',
@@ -34,6 +36,21 @@ export default function ListExercises({ type, trainingDay }: Iexercise) {
       [key]: id,
     }));
   };
+
+  const handleCreateExerciseTraining = async (id: string,) => {
+    console.log(training.data)
+    if (!training.data) return
+    await createExerciseTraining.mutateAsync({ exerciseId: id, trainingId: training.data?.related.id })
+    await training.refetch()
+  }
+
+  const handleDeleteExerciseTraining = async (id: string,) => {
+    console.log(training.data)
+    if (!training.data) return
+    await deleteExerciseTraining.mutateAsync({ exerciseId: id, trainingId: training.data?.related.id })
+    await training.refetch()
+
+  }
 
   if (type === "BCreatedBy") {
     return (
@@ -69,16 +86,18 @@ export default function ListExercises({ type, trainingDay }: Iexercise) {
           <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
             <p className="mr-2">{exercise.name}</p>
             <button
-              onClick={ }
-              className={`ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110`}>
+              onClick={() => handleDeleteExerciseTraining(exercise.id)}
+              className={`ml-auto text-green-600 p-1 bg-green-600 text-white rounded-full transition-transform transform scale-110`}>
               <IoIosAddCircleOutline />
             </button>
           </div>
         ))}
         {training.data?.restExercise.map((exercise) => (
           <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
-            <p className="mr-2">{exercise.name}</p>
+            <p
+              className="mr-2 ">{exercise.name}</p>
             <button
+              onClick={() => handleCreateExerciseTraining(exercise.id)}
               className={`ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110`}>
               <IoIosAddCircleOutline />
             </button>

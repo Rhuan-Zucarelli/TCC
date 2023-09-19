@@ -18,6 +18,32 @@ export const trainingRouter = createTRPCRouter({
     return ctx.prisma.trainingDiary.findMany();
   }),
 
+  createExerciseTraining: protectedProcedure
+    .input(
+      z.object({
+        trainingId: z.string(),
+        exerciseId: z.string(),
+      })
+    )
+    .mutation(({ input, ctx }) => {
+      return ctx.prisma.exerciseTraining.create({
+        data: input,
+      });
+    }),
+
+  deleteExerciseTraining: protectedProcedure
+    .input(
+      z.object({
+        trainingId: z.string(),
+        exerciseId: z.string(),
+      })
+    )
+    .mutation(({ input, ctx }) => {
+      return ctx.prisma.exerciseTraining.deleteMany({
+        where: { trainingId: input.trainingId, exerciseId: input.exerciseId },
+      });
+    }),
+
   getTrainingExercises: protectedProcedure
     .input(
       z.object({
@@ -56,12 +82,13 @@ export const trainingRouter = createTRPCRouter({
           return exerciseDetails;
         })
       );
-      const restExercise = await ctx.prisma.exercise.findMany({});
-      restExercise.filter((exercise) => {
+      let restExercise = await ctx.prisma.exercise.findMany({});
+      restExercise = restExercise.filter((exercise) => {
         const found = exercises.find((a) => a!.id === exercise.id);
         if (!found) return true;
       });
       return {
+        related: training,
         restExercise: restExercise,
         trainingExercise: exercises,
       } as TrainingExerciseResponse;
