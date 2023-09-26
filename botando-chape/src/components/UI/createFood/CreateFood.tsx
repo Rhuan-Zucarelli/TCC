@@ -71,7 +71,7 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 		setForm(formInicialState)
 	}
 
-	let detailsContent
+
 
 	if (type === 'Details') {
 		return (

@@ -6,6 +6,7 @@ import CreateFood from "../createFood/CreateFood";
 import { TbListDetails } from "react-icons/tb"
 import { IoIosAddCircleOutline } from "react-icons/io"
 import { MealType } from "next/pages/food";
+import SimpleBar from "simplebar-react";
 
 
 interface IcreatedBy {
@@ -17,7 +18,7 @@ interface StateType {
 };
 
 const data = new Date()
-data.setHours(0,0,0,0)
+data.setHours(0, 0, 0, 0)
 
 
 export default function ListFood({ type, mealType }: IcreatedBy) {
@@ -83,28 +84,37 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
 
   return (
     <>
-      <div className="border-t border-gray-300 py-2">
-        {meal.data?.mealFood.map((food) => (
-          <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
-            <p className="mr-2">{food.name}</p>
-            <button
-              onClick={() => handleDeleteMealFood(food.id)}
-              className={`ml-auto text-green-600 p-1 bg-green-600 text-white rounded-full transition-transform transform scale-110`}>
-              <IoIosAddCircleOutline />
-            </button>
-          </div>
-        ))}
-        {meal.data?.restFood.map((food) => (
-          <div className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100" >
-            <p
-              className="mr-2 ">{food.name}</p>
-            <button
-              onClick={() => handleCreateMealFood(food.id)}
-              className={`ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110`}>
-              <IoIosAddCircleOutline />
-            </button>
-          </div>
-        ))}
+      <div className="border-t border-gray-300 py-2" style={{ maxHeight: '300px' }}>
+        <SimpleBar style={{ maxHeight: '100%' }}>
+          {meal.data?.mealFood.map((food) => (
+            <div
+              key={food.id}
+              className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100"
+            >
+              <p className="mr-2">{food.name}</p>
+              <button
+                onClick={() => handleDeleteMealFood(food.id)}
+                className="ml-auto p-1 bg-green-600 text-white rounded-full transition-transform transform scale-110"
+              >
+                <IoIosAddCircleOutline />
+              </button>
+            </div>
+          ))}
+          {meal.data?.restFood.map((food) => (
+            <div
+              key={food.id}
+              className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100"
+            >
+              <p className="mr-2">{food.name}</p>
+              <button
+                onClick={() => handleCreateMealFood(food.id)}
+                className="ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110"
+              >
+                <IoIosAddCircleOutline />
+              </button>
+            </div>
+          ))}
+        </SimpleBar>
       </div>
     </>
   )
