@@ -63,86 +63,72 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 		setForm(formInicialState)
 	}
 
-	let detailsContent
-
 	if (type === "Details") {
-		detailsContent = (
-			<>
-				<h2 className="text-2xl font-semibold mb-4">Cadastro de exercício:</h2>
-				<form>
-					<div className="mb-4">
-						<label className="block text-sm font-medium text-gray-700">Nome</label>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							value={form.name}
-							onChange={(e) => setForm({ ...form, name: e.target.value })}
-							className="mt-1 p-2 w-full border rounded-md"
-						/>
-					</div>
-					<div className="mb-4">
-						<label className="block text-sm font-medium text-gray-700">Calorias Queimadas</label>
-						<input
-							type="number"
-							id="burnCalories"
-							value={form.burnCalories}
-							onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })}
-							name="burnCalories"
-							className="mt-1 p-2 w-full border rounded-md"
-						/>
-					</div>
-					<div className="flex space-x-2 mb-4">
-						<button
-							type="button"
-							onClick={handleSubmitUpdate}
-							className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
-						>
-							<BsArrowUpCircle />
-						</button>
-						<button
-							type="button"
-							onClick={handleSubmitDelete}
-							className="ml-auto cursor-pointer focus:outline-none hover:bg-red-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
-						>
-							<MdDeleteOutline />
-						</button>
-					</div>
-				</form>
-
-
-			</>
-		)
-	}
-	if (type === "") {
-		detailsContent = (
-			<>
-				<h2 className="text-2xl font-semibold mb-4">Cadastro de exercicio : </h2>
-				<form>
-					<div className="mb-4">
-						<label className="block text-sm font-medium text-gray-700">Nome </label>
-						<input type="text" id="name" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 p-2 w-full border rounded-md" />
-					</div>
-					<div className="mb-4">
-						<label className="block text-sm font-medium text-gray-700">Calorias Queimadas </label>
-						<input type="number" id="burnCalories" value={form.burnCalories} onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })} name="burnCalories" className="mt-1 p-2 w-full border rounded-md" />
-					</div>
+		<>
+			<h2 className="text-2xl font-semibold mb-4">Cadastro de exercício:</h2>
+			<form>
+				<div className="mb-4">
+					<label className="block text-sm font-medium text-gray-700">Nome</label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						value={form.name}
+						onChange={(e) => setForm({ ...form, name: e.target.value })}
+						className="mt-1 p-2 w-full border rounded-md"
+					/>
+				</div>
+				<div className="mb-4">
+					<label className="block text-sm font-medium text-gray-700">Calorias Queimadas</label>
+					<input
+						type="number"
+						id="burnCalories"
+						value={form.burnCalories}
+						onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })}
+						name="burnCalories"
+						className="mt-1 p-2 w-full border rounded-md"
+					/>
+				</div>
+				<div className="flex space-x-2 mb-4">
 					<button
 						type="button"
-						onClick={handleSubmitCreate}
+						onClick={handleSubmitUpdate}
 						className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
 					>
-						<GrSend />
+						<BsArrowUpCircle />
 					</button>
-				</form >
-			</>
-		)
+					<button
+						type="button"
+						onClick={handleSubmitDelete}
+						className="ml-auto cursor-pointer focus:outline-none hover:bg-red-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+					>
+						<MdDeleteOutline />
+					</button>
+				</div>
+			</form>
+		</>
 	}
-
 
 	return (
 		<>
-			{detailsContent}
+			<h2 className="text-2xl font-semibold mb-4">Cadastro de exercicio : </h2>
+			<form>
+				<div className="mb-4">
+					<label className="block text-sm font-medium text-gray-700">Nome </label>
+					<input type="text" id="name" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 p-2 w-full border rounded-md" />
+				</div>
+				<div className="mb-4">
+					<label className="block text-sm font-medium text-gray-700">Calorias Queimadas </label>
+					<input type="number" id="burnCalories" value={form.burnCalories} onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })} name="burnCalories" className="mt-1 p-2 w-full border rounded-md" />
+				</div>
+				<button
+					type="button"
+					onClick={handleSubmitCreate}
+					className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+				>
+					<GrSend />
+				</button>
+			</form >
 		</>
 	)
 }

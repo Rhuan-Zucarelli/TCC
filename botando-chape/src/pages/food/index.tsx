@@ -18,6 +18,12 @@ type StateType = {
   openListFood: boolean,
 }
 
+export enum MealType {
+  CAFEDAMANHA = 'CAFEDAMANHA',
+  ALMOCO = 'ALMOCO',
+  JANTAR = 'JANTAR',
+}
+
 export default function Food() {
   const [state, setState] = useState<StateType>({
     openBreackFast: false,
@@ -53,7 +59,7 @@ export default function Food() {
             <span className="ml-2">Café da manhã</span>
           </button>
           <Modal isOpen={state.openBreackFast} onClose={() => toggleState('openBreackFast')}>
-            <ListFood type="" />
+            <ListFood type="" mealType={MealType.CAFEDAMANHA} />
           </Modal>
 
           <button
@@ -64,7 +70,7 @@ export default function Food() {
             <span className="ml-2">Almoço</span>
           </button>
           <Modal isOpen={state.openLunch} onClose={() => toggleState('openLunch')} >
-            <ListFood type="" />
+            <ListFood type="" mealType={MealType.ALMOCO} />
           </Modal>
 
           <button
@@ -75,7 +81,7 @@ export default function Food() {
             <span className="ml-2">Jantar</span>
           </button>
           <Modal isOpen={state.openDinner} onClose={() => toggleState('openDinner')} >
-            <ListFood type="" />
+            <ListFood type="" mealType={MealType.JANTAR} />
           </Modal>
         </div>
       </div>
