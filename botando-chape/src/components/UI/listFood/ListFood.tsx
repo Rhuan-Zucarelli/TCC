@@ -10,11 +10,15 @@ import { MealType } from "next/pages/food";
 
 interface IcreatedBy {
   type: string;
-  mealType?: keyof typeof MealType
+  mealType: keyof typeof MealType
 };
 interface StateType {
   details: boolean;
 };
+
+const data = new Date()
+data.setHours(0,0,0,0)
+
 
 export default function ListFood({ type, mealType }: IcreatedBy) {
   const { data: sessionData } = useSession();
@@ -26,7 +30,7 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
     details: '',
   })
 
-  const meal = api.meal.getMealfood.useQuery({ userId: sessionData?.user.id, mealType })
+  const meal = api.meal.getMealfood.useQuery({ userId: sessionData?.user.id, mealType, dateMeal: data.toISOString() })
   console.log(foods.data)
 
   const toggleState = (key: keyof StateType, id: string) => {
@@ -38,17 +42,16 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
 
   const handleCreateMealFood = async (id: string,) => {
     console.log(foods.data)
-    if (!foods.data) return
+    if (!meal.data) return
     await createMealFood.mutateAsync({ foodId: id, mealId: meal.data?.related.id })
-    await foods.refetch()
+    await meal.refetch()
   }
 
   const handleDeleteMealFood = async (id: string,) => {
     console.log(foods.data)
-    if (!foods.data) return
+    if (!meal.data) return
     await deleteMealFood.mutateAsync({ foodId: id, mealId: meal.data?.related.id })
-    await foods.refetch()
-
+    await meal.refetch()
   }
 
   if (type === "BCreatedBy") {

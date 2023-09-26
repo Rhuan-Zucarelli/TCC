@@ -47,8 +47,8 @@ export const mealRouter = createTRPCRouter({
     .input(
       z.object({
         userId: z.string().optional(),
-        mealType: z.string().optional(),
-        dateMeal: z.date().optional(),
+        mealType: z.string(),
+        dateMeal: z.string(),
       })
     )
     .query(async ({ input, ctx }) => {
