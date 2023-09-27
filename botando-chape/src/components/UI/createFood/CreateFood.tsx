@@ -49,8 +49,8 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 			carbs: food.data.carbs,
 			protein: food.data.protein,
 			fat: food.data.fat,
-		})
-	}), [food.data]
+		});
+	}, [food.data])
 
 	const handleSubmitCreate = async (e: any) => {
 		e.preventDefault();
@@ -63,21 +63,21 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 		if (!id) return
 		await updateFood.mutateAsync({ ...form, id })
 		setForm(formInicialState)
+		onClose()
 	}
 	const handleSubmitDelete = async (e: any) => {
 		e.preventDefault();
 		if (!id) return
 		await deleteFood.mutateAsync({ ...form, id })
 		setForm(formInicialState)
+		onClose()
 	}
-
-
 
 	if (type === 'Details') {
 		return (
 			<>
 				<h2 className="text-2xl font-semibold mb-4">Cadastro de Comida : </h2>
-				<form onSubmit={handleSubmitCreate}>
+				<form >
 					<div className="mb-4">
 						<label className="block text-sm font-medium text-gray-700">Nome </label>
 						<input
@@ -206,7 +206,7 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 				</div>
 				<button
 					type="button"
-					onClick={handleSubmitDelete}
+					onClick={handleSubmitCreate}
 					className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
 				>
 					<GrSend />

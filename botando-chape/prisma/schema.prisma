@@ -16,6 +16,7 @@ model Food {
   protein   Int
   fat       Int
   userId    String?
+  deletedAt DateTime?
   mealFoods MealFood[]
   createdBy User?      @relation(fields: [userId], references: [id])
 }

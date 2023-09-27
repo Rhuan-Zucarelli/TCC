@@ -7,7 +7,7 @@ import {
 
 export const foodRouter = createTRPCRouter({
   getFoods: protectedProcedure.query(({ ctx }) => {
-    return ctx.prisma.food.findMany();
+    return ctx.prisma.food.findMany({ where: { deletedAt: null } });
   }),
 
   getById: protectedProcedure
@@ -32,7 +32,7 @@ export const foodRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       if (!input.userId) return [];
       return ctx.prisma.food.findMany({
-        where: { createdBy: { id: input.userId } },
+        where: { createdBy: { id: input.userId }, deletedAt: null },
       });
     }),
 
@@ -78,7 +78,9 @@ export const foodRouter = createTRPCRouter({
       })
     )
     .mutation(({ input, ctx }) => {
-      return ctx.prisma.food.delete({
+      const data = new Date();
+      return ctx.prisma.food.update({
+        data: { deletedAt: data.toISOString() },
         where: { id: input.id },
       });
     }),
