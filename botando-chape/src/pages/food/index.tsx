@@ -103,7 +103,7 @@ export default function Food() {
           Lista de comidas
         </button>
         <Modal isOpen={state.openListFood} onClose={() => toggleState('openListFood')} >
-          <ListFood type="BCreatedBy" />
+          <ListFood type="BCreatedBy"  />
         </Modal>
       </div>
 

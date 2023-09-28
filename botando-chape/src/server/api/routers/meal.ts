@@ -47,12 +47,19 @@ export const mealRouter = createTRPCRouter({
     .input(
       z.object({
         userId: z.string().optional(),
-        mealType: z.string(),
+        mealType: z.string().optional(),
         dateMeal: z.string(),
       })
     )
     .query(async ({ input, ctx }) => {
-      if (!input.userId || !input.mealType || !input.dateMeal) return null;
+      if (!input.userId || !input.mealType || !input.dateMeal) {
+        const restFood = await ctx.prisma.food.findMany()
+        return{
+          related: null,
+          mealFood: [],
+          restFood,
+        }
+      };
       const meal = await ctx.prisma.meal.findFirst({
         where: {
           userId: input.userId,
