@@ -55,7 +55,7 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 		if (!id) return
 		await updateExercise.mutateAsync({ ...form, id })
 		setForm(formInicialState)
-		onClose()
+
 	}
 	const handleSubmitDelete = async (e: any) => {
 		e.preventDefault();

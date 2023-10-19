@@ -36,7 +36,7 @@ export default function ConfigUser() {
     }));
   }, [user.data]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmitUpdate = async (e: any) => {
     e.preventDefault();
 
     try {
@@ -61,10 +61,12 @@ export default function ConfigUser() {
       // Trate o erro conforme necessário
     }
   };
+
+  console.log()
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">Formulário</h1>
-      <form onSubmit={handleSubmit}>
+      <form >
         <div className="mb-4">
           <label htmlFor="age" className="block mb-1">
             Idade:
@@ -132,6 +134,7 @@ export default function ConfigUser() {
         </div>
         <button
           type="button"
+          onClick={handleSubmitUpdate}
           className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
         >
           <GrSend />
