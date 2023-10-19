@@ -1,4 +1,3 @@
-import { exampleRouter } from "next/server/api/routers/example";
 import { createTRPCRouter } from "next/server/api/trpc";
 import { exerciseRouter } from "./routers/exercise";
 import { foodRouter } from "./routers/food";
@@ -12,7 +11,6 @@ import { userRouter } from "./routers/user";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  example: exampleRouter,
   exercise: exerciseRouter,
   food: foodRouter,
   meal: mealRouter,

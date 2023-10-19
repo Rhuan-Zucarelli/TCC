@@ -11,7 +11,7 @@ import SimpleBar from "simplebar-react";
 
 interface IcreatedBy {
   type: string;
-  mealType: keyof typeof MealType
+  mealType?: keyof typeof MealType
 };
 interface StateType {
   details: boolean;
@@ -43,14 +43,14 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
 
   const handleCreateMealFood = async (id: string,) => {
     console.log(foods.data)
-    if (!meal.data) return
+    if (!meal.data || !meal.data.related) return
     await createMealFood.mutateAsync({ foodId: id, mealId: meal.data?.related.id })
     await meal.refetch()
   }
 
   const handleDeleteMealFood = async (id: string,) => {
     console.log(foods.data)
-    if (!meal.data) return
+    if (!meal.data || !meal.data.related) return
     await deleteMealFood.mutateAsync({ foodId: id, mealId: meal.data?.related.id })
     await meal.refetch()
   }
