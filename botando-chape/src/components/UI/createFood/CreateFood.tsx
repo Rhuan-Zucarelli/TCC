@@ -6,14 +6,15 @@ import { useEffect } from 'react';
 import { BsArrowUpCircle } from 'react-icons/bs';
 import { MdDeleteOutline } from 'react-icons/md';
 import { GrSend } from 'react-icons/gr';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 
 const schema = z.object({
-	name: z.string(),
-	calories: z.number(),
-	carbs: z.number(),
-	protein: z.number(),
-	fat: z.number(),
+	name: z.string().nonempty('O campo nome não pode ficar vazio !'),
+	calories: z.number().min(1, 'O campo Calorias não pode ficar vazio !'),
+	carbs: z.number().min(1, 'O campo Carboidratos não pode ficar vazio !'),
+	protein: z.number().min(1, 'O campo Proteina não pode ficar vazio !'),
+	fat: z.number().min(1, 'O campo Gordura não pode ficar vazio !'),
 })
 
 const formInicialState = {
@@ -52,12 +53,27 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 		});
 	}, [food.data])
 
+	const [errorMessages, setErrorMessages] = useState<string[]>([]);
+
 	const handleSubmitCreate = async (e: any) => {
 		e.preventDefault();
+		const validationResult = schema.safeParse(form);
+		if (!validationResult.success) {
+			const errorMessages = validationResult.error.issues.map((issue) => issue.message);
+			setErrorMessages(errorMessages);
+			return;
+		}
+		console.log('Dados atualizados com sucesso!');
 		await createFood.mutateAsync({ ...form, userId: sessionData?.user.id })
 		setForm(formInicialState)
 		onClose()
 	}
+
+	const validateNumber = (value: string) => {
+		if (!value || value.length === 0) return 0
+		return parseInt(value);
+	}
+
 	const handleSubmitUpdate = async (e: any) => {
 		e.preventDefault();
 		if (!id) return
@@ -153,6 +169,25 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 	return (
 		<>
 			<h2 className="text-2xl font-semibold mb-4">Cadastro de Comida : </h2>
+			{errorMessages.length > 0 && (
+				<div className="flex flex-col">
+					{errorMessages.map((message, index) => (
+						<div key={index} className="border border-red-500 text-red-500 bg-red-50 p-4 rounded-lg flex flex-col">
+							<div className="ml-auto">
+								<button type='button' onClick={() => {
+									const updatedErrorMessages = [...errorMessages];
+									updatedErrorMessages.splice(index, 1);
+									setErrorMessages(updatedErrorMessages);
+								}}
+								>
+									<AiOutlineCloseCircle className="text-xl" />
+								</button>
+							</div>
+							<span>{message}</span>
+						</div>
+					))}
+				</div>
+			)}
 			<form>
 				<div className="mb-4">
 					<label className="block text-sm font-medium text-gray-700">Nome </label>

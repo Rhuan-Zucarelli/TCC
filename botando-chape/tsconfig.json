@@ -29,5 +29,10 @@
     "**/*.cjs",
     "**/*.mjs"
   ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "exclude": ["node_modules"]
 }
