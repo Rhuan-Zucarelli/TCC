@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 import { GrSend } from 'react-icons/gr';
 
 const schema = z.object({
-  age: z.number(),
-  gender: z.string(),
-  height: z.number(),
-  weight: z.number(),
-  targetWeight: z.number(),
+  age: z.number().min(1, 'Você deve ter mais que 1 ano de idade para cadastrar!').max(999, 'Você não pode estar vivo se tem essa idade!'),
+  gender: z.string().nonempty('O campo Genero não pode estar vazio !'),
+  height: z.number().min(1, 'O campo Altura não pode estar vazio'),
+  weight: z.number().min(1, 'O campo Peso não pode estar vazio'),
+  targetWeight: z.number().min(1, 'O campo Peso Alvo não pode estar vazio'),
 });
 
 export default function ConfigUser() {
@@ -36,37 +36,43 @@ export default function ConfigUser() {
     }));
   }, [user.data]);
 
-  const handleSubmitUpdate = async (e: any) => {
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+
+  const handleSubmitUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const validationResult = schema.safeParse(formData);
-      if (!validationResult.success) {
-        console.error('Form data is not valid:', validationResult.error);
-        return;
-      }
+    const validationResult = schema.safeParse(formData);
+    if (!validationResult.success) {
+      const errorMessages = validationResult.error.issues.map((issue) => issue.message);
+      setErrorMessages(errorMessages);
 
-      if (!sessionData?.user.id) return
-      // Chama a rota trpc para atualizar o usuário
-      await updateUser.mutateAsync({
-        userId: sessionData?.user.id,
-        ...formData,
-      });
+      setTimeout(() => {
+        setErrorMessages([]);
+      }, 5000);
 
-      // Realiza qualquer lógica adicional necessária após o envio
-
-      console.log('Dados atualizados com sucesso!');
-    } catch (error) {
-      console.error('Erro ao atualizar os dados:', error);
-      // Trate o erro conforme necessário
+      return;
     }
+    console.log('Dados atualizados com sucesso!');
   };
 
-  console.log()
+  const validateNumber = (value: string) => {
+    if (!value || value.length === 0) return 0
+    return parseInt(value);
+  }
+
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">Formulário</h1>
-      <form >
+      {errorMessages.length > 0 && (
+        <div className="mb-4">
+          {errorMessages.map((message, index) => (
+            <div key={index} className="border border-red-500 text-red-500 bg-red-50 p-4 rounded-lg flex flex-co">
+              {message}
+            </div>
+          ))}
+        </div>
+      )}
+      <form>
         <div className="mb-4">
           <label htmlFor="age" className="block mb-1">
             Idade:
@@ -76,7 +82,7 @@ export default function ConfigUser() {
             id="age"
             name="age"
             value={formData.age}
-            onChange={(e) => setFormData({ ...formData, age: parseInt(e.target.value) })}
+            onChange={(e) => setFormData({ ...formData, age: validateNumber(e.target.value) })}
             className="w-full px-3 py-2 border rounded"
           />
         </div>
@@ -102,7 +108,7 @@ export default function ConfigUser() {
             id="height"
             name="height"
             value={formData.height}
-            onChange={(e) => setFormData({ ...formData, height: parseInt(e.target.value) })}
+            onChange={(e) => setFormData({ ...formData, height: validateNumber(e.target.value) })}
             className="w-full px-3 py-2 border rounded"
           />
         </div>
@@ -115,7 +121,7 @@ export default function ConfigUser() {
             id="weight"
             name="weight"
             value={formData.weight}
-            onChange={(e) => setFormData({ ...formData, weight: parseInt(e.target.value) })}
+            onChange={(e) => setFormData({ ...formData, weight: validateNumber(e.target.value) })}
             className="w-full px-3 py-2 border rounded"
           />
         </div>
@@ -128,7 +134,7 @@ export default function ConfigUser() {
             id="targetWeight"
             name="targetWeight"
             value={formData.targetWeight}
-            onChange={(e) => setFormData({ ...formData, targetWeight: parseInt(e.target.value) })}
+            onChange={(e) => setFormData({ ...formData, targetWeight: validateNumber(e.target.value) })}
             className="w-full px-3 py-2 border rounded"
           />
         </div>

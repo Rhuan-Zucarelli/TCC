@@ -6,10 +6,11 @@ import { useEffect } from 'react';
 import { BsArrowUpCircle } from 'react-icons/bs'
 import { MdDeleteOutline } from 'react-icons/md'
 import { GrSend } from 'react-icons/gr';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const schema = z.object({
-	name: z.string(),
-	burnCalories: z.number(),
+	name: z.string().nonempty('O campo nome não pode ficar vazio !'),
+	burnCalories: z.number().min(1, 'O campo Calorias queimadas não pode ficar vazio !'),
 })
 
 const formInicialState = {
@@ -44,12 +45,28 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 
 	}, [exercise.data])
 
-	const handleSubmitCreate = async (e: any) => {
+	const [errorMessages, setErrorMessages] = useState<string[]>([]);
+
+	const handleSubmitCreate = async (e: React.FormEvent) => {
 		e.preventDefault();
+		const validationResult = schema.safeParse(form);
+		if (!validationResult.success) {
+			const errorMessages = validationResult.error.issues.map((issue) => issue.message);
+			setErrorMessages(errorMessages);
+			return;
+		}
+		console.log('Dados atualizados com sucesso!');
 		await createExercise.mutateAsync({ ...form, userId: sessionData?.user.id })
 		setForm(formInicialState)
 		onClose()
+
 	}
+
+	const validateNumber = (value: string) => {
+		if (!value || value.length === 0) return 0
+		return parseInt(value);
+	}
+
 	const handleSubmitUpdate = async (e: any) => {
 		e.preventDefault();
 		if (!id) return
@@ -87,7 +104,7 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 							type="number"
 							id="burnCalories"
 							value={form.burnCalories}
-							onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })}
+							onChange={(e) => setForm({ ...form, burnCalories: validateNumber(e.target.value) })}
 							name="burnCalories"
 							className="mt-1 p-2 w-full border rounded-md"
 						/>
@@ -116,6 +133,25 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 	return (
 		<>
 			<h2 className="text-2xl font-semibold mb-4">Cadastro de exercicio : </h2>
+			{errorMessages.length > 0 && (
+				<div className="flex flex-col">
+					{errorMessages.map((message, index) => (
+						<div key={index} className="border border-red-500 text-red-500 bg-red-50 p-4 rounded-lg flex flex-col">
+							<div className="ml-auto">
+								<button type='button' onClick={() => {
+									const updatedErrorMessages = [...errorMessages];
+									updatedErrorMessages.splice(index, 1);
+									setErrorMessages(updatedErrorMessages);
+								}}
+								>
+									<AiOutlineCloseCircle className="text-xl" />
+								</button>
+							</div>
+							<span>{message}</span>
+						</div>
+					))}
+				</div>
+			)}
 			<form>
 				<div className="mb-4">
 					<label className="block text-sm font-medium text-gray-700">Nome </label>
