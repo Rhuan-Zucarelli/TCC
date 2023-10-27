@@ -170,9 +170,9 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 		<>
 			<h2 className="text-2xl font-semibold mb-4">Cadastro de Comida : </h2>
 			{errorMessages.length > 0 && (
-				<div className="flex flex-col">
+				<div className="flex flex-col gap-4">
 					{errorMessages.map((message, index) => (
-						<div key={index} className="border border-red-500 text-red-500 bg-red-50 p-4 rounded-lg flex flex-col">
+						<div key={index} className="border border-red-500 text-red-500 bg-red-50 px-2 rounded-lg flex flex-col w-50">
 							<div className="ml-auto">
 								<button type='button' onClick={() => {
 									const updatedErrorMessages = [...errorMessages];

@@ -42,7 +42,6 @@ export function Modal({ isOpen, onClose, children }: Imodal) {
       <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-md modal relative"> {/* Adicionamos a classe relative aqui */}
           {children}
-
           <div className="absolute top-0 right-0"> {/* Posicionamento absoluto no canto superior direito */}
             <button
               className="cursor-pointer focus:outline-none hover:bg-red-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"

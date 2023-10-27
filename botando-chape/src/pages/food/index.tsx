@@ -41,6 +41,15 @@ export default function Food() {
     }));
   };
 
+  const handleDateChange = (date: Date | null) => {
+    // Limpe as refeições existentes (ou execute qualquer lógica apropriada para redefinir as refeições)
+    setMeals([]); // Certifique-se de ter um estado para armazenar as refeições (meals) e uma função para atualizar esse estado (setMeals).
+
+    // Atualize a data selecionada
+    setSelectedDate(date);
+  };
+
+
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen">
@@ -103,7 +112,7 @@ export default function Food() {
           Lista de comidas
         </button>
         <Modal isOpen={state.openListFood} onClose={() => toggleState('openListFood')} >
-          <ListFood type="BCreatedBy"  />
+          <ListFood type="BCreatedBy" />
         </Modal>
       </div>
 

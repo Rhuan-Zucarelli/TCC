@@ -84,8 +84,8 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
 
   return (
     <>
-      <div className="border-t border-gray-300 py-2" style={{ maxHeight: '300px' }}>
-        <SimpleBar style={{ maxHeight: '100%' }}>
+      <div className="border-t border-gray-300 py-2">
+        <div className="max-h-60 overflow-y-auto">
           {meal.data?.mealFood.map((food) => (
             <div
               key={food.id}
@@ -108,15 +108,17 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
               <p className="mr-2">{food.name}</p>
               <button
                 onClick={() => handleCreateMealFood(food.id)}
-                className="ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110"
+                className="ml-auto text-green-600 p-1 hover-bg-green-600 hover-text-white rounded-full transition-transform transform hover:scale-110"
               >
                 <IoIosAddCircleOutline />
               </button>
             </div>
           ))}
-        </SimpleBar>
+        </div>
       </div>
     </>
-  )
+  );
+
+
 
 }
