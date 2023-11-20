@@ -29,10 +29,9 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
   const userFoods = foods.data?.filter(food => food.userId === sessionData?.user.id)
   const [state, setState] = useState({
     details: '',
-  })
+  });
 
-  const meal = api.meal.getMealfood.useQuery({ userId: sessionData?.user.id, mealType, dateMeal: data.toISOString() })
-  console.log(foods.data)
+  const meal = api.meal.getMealfood.useQuery({ userId: sessionData?.user.id, mealType, dateMeal: data.toISOString() });
 
   const toggleState = (key: keyof StateType, id: string) => {
     setState((prevState) => ({
@@ -85,7 +84,7 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
   return (
     <>
       <div className="border-t border-gray-300 py-2">
-        <div className="max-h-60 overflow-y-auto">
+        <div className="max-h-80 overflow-y-auto">
           {meal.data?.mealFood.map((food) => (
             <div
               key={food.id}
