@@ -12,7 +12,6 @@ import { api } from "next/utils/api";
 import { type Food } from "@prisma/client";
 import { calcFoods } from "next/utils/tools";
 
-
 type StateType = {
   openBreackFast: boolean;
   openLunch: boolean;
@@ -106,16 +105,16 @@ export default function Food() {
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="rounded-md border border-gray-300 px-4 py-2">
                   {calc?.totalProteinPerDay}
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="rounded-md border border-gray-300 px-4 py-2">
                   {calc?.totalCarbsPerDay}
-                  ''                  </td>
-                <td className="border border-gray-300 px-4 py-2">
+                </td>
+                <td className="rounded-md border border-gray-300 px-4 py-2">
                   {calc?.totalFatPerDay}
                 </td>
-                <td className="border border-gray-300 px-4 py-2">
+                <td className="rounded-md border border-gray-300 px-4 py-2">
                   {calc?.totalCaloriesPerDay}
                 </td>
               </tr>
@@ -123,12 +122,6 @@ export default function Food() {
           </table>
         </div>
         <div className="flex h-screen flex-col items-center justify-center">
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            className="mt-4 rounded-lg border p-2"
-            dateFormat="dd/MM/yyyy"
-          />
           <div className="mt-4 flex flex-col space-y-4">
             <button
               className="flex items-center rounded-2xl bg-green-600 p-1 px-4 py-2 text-white hover:scale-110 hover:bg-green-700"

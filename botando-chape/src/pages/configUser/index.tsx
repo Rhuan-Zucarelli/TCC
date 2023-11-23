@@ -52,6 +52,10 @@ export default function ConfigUser() {
 
       return;
     }
+    await updateUser.mutateAsync({
+      ...formData,
+      userId: sessionData!.user.id
+    })
     console.log('Dados atualizados com sucesso!');
   };
 
