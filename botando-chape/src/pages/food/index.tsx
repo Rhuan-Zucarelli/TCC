@@ -86,36 +86,36 @@ export default function Food() {
     <>
       <div className="flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-row items-center justify-between p-4">
-          <table className="mt-2 table-auto border-collapse border border-gray-400">
-            <thead>
+          <table className="mt-2 table-auto border-collapse ">
+            <thead className="text-center">
               <tr>
-                <th className="border border-gray-300 px-4 py-2 text-lg font-medium">
+                <th className="px-10 py-2 text-lg font-medium">
                   Proteínas
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-lg font-medium">
+                <th className="px-10 py-2 text-lg font-medium">
                   Carboidratos
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-lg font-medium">
+                <th className="px-10 py-2 text-lg font-medium">
                   Gorduras
                 </th>
-                <th className="border border-gray-300 px-4 py-2 text-lg font-medium">
+                <th className="px-10 py-2 text-lg font-medium">
                   Calorias
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-center">
               <tr>
-                <td className="rounded-md border border-gray-300 px-4 py-2">
-                  {calc?.totalProteinPerDay}
+                <td className="px-4 py-2">
+                  {calc?.totalProteinPerDay} g
                 </td>
-                <td className="rounded-md border border-gray-300 px-4 py-2">
-                  {calc?.totalCarbsPerDay}
+                <td className="px-4 py-2">
+                  {calc?.totalCarbsPerDay} g
                 </td>
-                <td className="rounded-md border border-gray-300 px-4 py-2">
-                  {calc?.totalFatPerDay}
+                <td className="px-4 py-2">
+                  {calc?.totalFatPerDay} g
                 </td>
-                <td className="rounded-md border border-gray-300 px-4 py-2">
-                  {calc?.totalCaloriesPerDay}
+                <td className="px-4 py-2">
+                  {calc?.totalCaloriesPerDay} cal
                 </td>
               </tr>
             </tbody>

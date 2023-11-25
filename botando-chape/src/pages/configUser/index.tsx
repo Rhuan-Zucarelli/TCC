@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { api } from 'next/utils/api';
 import { useEffect } from 'react';
 import { GrSend } from 'react-icons/gr';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const schema = z.object({
   age: z.number().min(1, 'Você deve ter mais que 1 ano de idade para cadastrar!').max(999, 'Você não pode estar vivo se tem essa idade!'),
@@ -37,6 +38,7 @@ export default function ConfigUser() {
   }, [user.data]);
 
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleSubmitUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,18 +47,29 @@ export default function ConfigUser() {
     if (!validationResult.success) {
       const errorMessages = validationResult.error.issues.map((issue) => issue.message);
       setErrorMessages(errorMessages);
-
-      setTimeout(() => {
-        setErrorMessages([]);
-      }, 5000);
-
       return;
     }
-    await updateUser.mutateAsync({
-      ...formData,
-      userId: sessionData!.user.id
-    })
-    console.log('Dados atualizados com sucesso!');
+
+    try {
+      await updateUser.mutateAsync({
+        ...formData,
+        userId: sessionData!.user.id
+      });
+
+      setSuccessMessage('Dados atualizados com sucesso!');
+
+    } catch (error) {
+      console.error('Erro ao atualizar dados:', error);
+
+    }
+  };
+
+  const handleCloseSuccessMessage = () => {
+    setSuccessMessage(null);
+  };
+
+  const handleCloseErrorMessages = () => {
+    setErrorMessages([]);
   };
 
   const validateNumber = (value: string) => {
@@ -67,11 +80,34 @@ export default function ConfigUser() {
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">Formulário</h1>
+      {successMessage && (
+        <div className="mb-4 relative">
+          <div className="border border-green-500 bg-green-50 p-4 rounded-lg flex flex-co">
+            {successMessage}
+            <div className="absolute top-0 right-0">
+              <button
+                className="cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+                onClick={handleCloseSuccessMessage}
+              >
+                <AiOutlineCloseCircle className="text-xl" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {errorMessages.length > 0 && (
         <div className="mb-4">
           {errorMessages.map((message, index) => (
-            <div key={index} className="border border-red-500 text-red-500 bg-red-50 p-4 rounded-lg flex flex-co">
+            <div key={index} className="border border-red-500  bg-red-50 p-4 rounded-lg flex flex-co relative">
               {message}
+              <div className="absolute top-0 right-0">
+                <button
+                  className="cursor-pointer focus:outline-none hover:bg-red-800 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+                  onClick={handleCloseErrorMessages}
+                >
+                  <AiOutlineCloseCircle className="text-xl" />
+                </button>
+              </div>
             </div>
           ))}
         </div>

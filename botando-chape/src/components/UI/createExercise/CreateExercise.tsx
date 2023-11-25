@@ -132,43 +132,48 @@ export default function CreateExercise({ type, onClose, id }: Idetails) {
 
 	return (
 		<>
-			<h2 className="text-2xl font-semibold mb-4">Cadastro de exercicio : </h2>
-			{errorMessages.length > 0 && (
-				<div className="flex flex-col">
-					{errorMessages.map((message, index) => (
-						<div key={index} className="border border-red-500 text-red-500 bg-red-50 p-4 rounded-lg flex flex-col">
-							<div className="ml-auto">
-								<button type='button' onClick={() => {
-									const updatedErrorMessages = [...errorMessages];
-									updatedErrorMessages.splice(index, 1);
-									setErrorMessages(updatedErrorMessages);
-								}}
-								>
-									<AiOutlineCloseCircle className="text-xl" />
-								</button>
+			<div className="max-h-80 overflow-y-auto">
+				<h2 className="text-2xl font-semibold mb-4">Cadastro de exercicio : </h2>
+				{errorMessages.length > 0 && (
+					<div className="flex flex-col">
+						{errorMessages.map((message, index) => (
+							<div key={index} className="border border-red-500 bg-red-50 p-4 rounded-lg flex flex-col">
+								<div className="ml-auto">
+									<button
+										type='button'
+										className='cursor-pointer focus:outline-none hover:bg-red-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110'
+										onClick={() => {
+											const updatedErrorMessages = [...errorMessages];
+											updatedErrorMessages.splice(index, 1);
+											setErrorMessages(updatedErrorMessages);
+										}}
+									>
+										<AiOutlineCloseCircle className="text-xl" />
+									</button>
+								</div>
+								<span>{message}</span>
 							</div>
-							<span>{message}</span>
-						</div>
-					))}
-				</div>
-			)}
-			<form>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Nome </label>
-					<input type="text" id="name" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Calorias Queimadas </label>
-					<input type="number" id="burnCalories" value={form.burnCalories} onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })} name="burnCalories" className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<button
-					type="button"
-					onClick={handleSubmitCreate}
-					className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
-				>
-					<GrSend />
-				</button>
-			</form >
+						))}
+					</div>
+				)}
+				<form>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Nome </label>
+						<input type="text" id="name" name="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Calorias Queimadas </label>
+						<input type="number" id="burnCalories" value={form.burnCalories} onChange={(e) => setForm({ ...form, burnCalories: parseInt(e.target.value) })} name="burnCalories" className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<button
+						type="button"
+						onClick={handleSubmitCreate}
+						className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+					>
+						<GrSend />
+					</button>
+				</form >
+			</div>
 		</>
 	)
 }

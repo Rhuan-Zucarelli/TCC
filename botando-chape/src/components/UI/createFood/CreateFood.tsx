@@ -168,85 +168,90 @@ export default function CreateFood({ type, onClose, id }: Idetails) {
 
 	return (
 		<>
-			<h2 className="text-2xl font-semibold mb-4">Cadastro de Comida : </h2>
-			{errorMessages.length > 0 && (
-				<div className="flex flex-col gap-4">
-					{errorMessages.map((message, index) => (
-						<div key={index} className="border border-red-500 text-red-500 bg-red-50 px-2 rounded-lg flex flex-col w-50">
-							<div className="ml-auto">
-								<button type='button' onClick={() => {
-									const updatedErrorMessages = [...errorMessages];
-									updatedErrorMessages.splice(index, 1);
-									setErrorMessages(updatedErrorMessages);
-								}}
-								>
-									<AiOutlineCloseCircle className="text-xl" />
-								</button>
+			<div className="max-h-80 overflow-y-auto">
+				<h2 className="text-2xl font-semibold mb-4">Cadastro de Comida : </h2>
+				{errorMessages.length > 0 && (
+					<div className="flex flex-col gap-4">
+						{errorMessages.map((message, index) => (
+							<div key={index} className="border border-red-500 bg-red-50 px-2 rounded-lg flex flex-col w-50">
+								<div className="ml-auto">
+									<button
+										type='button'
+										className='cursor-pointer focus:outline-none hover:bg-red-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110'
+										onClick={() => {
+											const updatedErrorMessages = [...errorMessages];
+											updatedErrorMessages.splice(index, 1);
+											setErrorMessages(updatedErrorMessages);
+										}}
+									>
+										<AiOutlineCloseCircle className="text-xl" />
+									</button>
+								</div>
+								<span>{message}</span>
 							</div>
-							<span>{message}</span>
-						</div>
-					))}
-				</div>
-			)}
-			<form>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Nome </label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						value={form.name}
-						onChange={(e) => setForm({ ...form, name: e.target.value })}
-						className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Calorias </label>
-					<input
-						type="number"
-						id="Calories"
-						name="Calories"
-						value={form.calories}
-						onChange={(e) => setForm({ ...form, calories: parseInt(e.target.value) })}
-						className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Carboidratos </label>
-					<input
-						type="number"
-						id="Carbs"
-						name="Carbs"
-						value={form.carbs}
-						onChange={(e) => setForm({ ...form, carbs: parseInt(e.target.value) })}
-						className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Proteinas </label>
-					<input
-						type="number"
-						id="Protein"
-						name="Protein"
-						value={form.protein}
-						onChange={(e) => setForm({ ...form, protein: parseInt(e.target.value) })}
-						className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<div className="mb-4">
-					<label className="block text-sm font-medium text-gray-700">Gordura </label>
-					<input
-						type="number"
-						id="Fat"
-						name="Fat"
-						value={form.fat}
-						onChange={(e) => setForm({ ...form, fat: parseInt(e.target.value) })}
-						className="mt-1 p-2 w-full border rounded-md" />
-				</div>
-				<button
-					type="button"
-					onClick={handleSubmitCreate}
-					className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
-				>
-					<GrSend />
-				</button>
-			</form>
+						))}
+					</div>
+				)}
+				<form>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Nome </label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							value={form.name}
+							onChange={(e) => setForm({ ...form, name: e.target.value })}
+							className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Calorias </label>
+						<input
+							type="number"
+							id="Calories"
+							name="Calories"
+							value={form.calories}
+							onChange={(e) => setForm({ ...form, calories: parseInt(e.target.value) })}
+							className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Carboidratos </label>
+						<input
+							type="number"
+							id="Carbs"
+							name="Carbs"
+							value={form.carbs}
+							onChange={(e) => setForm({ ...form, carbs: parseInt(e.target.value) })}
+							className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Proteinas </label>
+						<input
+							type="number"
+							id="Protein"
+							name="Protein"
+							value={form.protein}
+							onChange={(e) => setForm({ ...form, protein: parseInt(e.target.value) })}
+							className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<div className="mb-4">
+						<label className="block text-sm font-medium text-gray-700">Gordura </label>
+						<input
+							type="number"
+							id="Fat"
+							name="Fat"
+							value={form.fat}
+							onChange={(e) => setForm({ ...form, fat: parseInt(e.target.value) })}
+							className="mt-1 p-2 w-full border rounded-md" />
+					</div>
+					<button
+						type="button"
+						onClick={handleSubmitCreate}
+						className="ml-auto cursor-pointer focus:outline-none hover:bg-green-600 hover:bg-opacity-100 rounded-full p-1 hover:scale-110"
+					>
+						<GrSend />
+					</button>
+				</form>
+			</div>
 		</>
 	)
 }
