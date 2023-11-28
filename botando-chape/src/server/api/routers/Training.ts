@@ -64,7 +64,9 @@ export const trainingRouter = createTRPCRouter({
             trainingDay: input.trainingDay,
           },
         });
-        const restExercise = await ctx.prisma.exercise.findMany({});
+        const restExercise = await ctx.prisma.exercise.findMany({
+          where: { deletedAt: null },
+        });
         return {
           related: newTraining,
           trainingExercise: [],
@@ -82,7 +84,9 @@ export const trainingRouter = createTRPCRouter({
           return exerciseDetails;
         })
       );
-      let restExercise = await ctx.prisma.exercise.findMany({});
+      let restExercise = await ctx.prisma.exercise.findMany({
+        where: { deletedAt: null },
+      });
       restExercise = restExercise.filter((exercise) => {
         const found = exercises.find((a) => a!.id === exercise.id);
         if (!found) return true;

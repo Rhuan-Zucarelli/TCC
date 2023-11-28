@@ -53,13 +53,15 @@ export const mealRouter = createTRPCRouter({
     )
     .query(async ({ input, ctx }) => {
       if (!input.userId || !input.mealType || !input.dateMeal) {
-        const restFood = await ctx.prisma.food.findMany()
-        return{
+        const restFood = await ctx.prisma.food.findMany({
+          where: { deletedAt: null },
+        });
+        return {
           related: null,
           mealFood: [],
           restFood,
-        }
-      };
+        };
+      }
       const meal = await ctx.prisma.meal.findFirst({
         where: {
           userId: input.userId,
@@ -76,7 +78,9 @@ export const mealRouter = createTRPCRouter({
             dateMeal: input.dateMeal,
           },
         });
-        const restFood = await ctx.prisma.food.findMany({});
+        const restFood = await ctx.prisma.food.findMany({
+          where: { deletedAt: null },
+        });
         return {
           related: newMeal,
           mealFood: [],
@@ -94,7 +98,9 @@ export const mealRouter = createTRPCRouter({
           return foodDetails;
         })
       );
-      let restFood = await ctx.prisma.food.findMany({});
+      let restFood = await ctx.prisma.food.findMany({
+        where: { deletedAt: null },
+      });
       restFood = restFood.filter((food) => {
         const found = foods.find((a) => a!.id === food.id);
         if (!found) return true;

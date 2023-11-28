@@ -30,11 +30,12 @@ export default function ListExercises({ type, trainingDay }: Iexercise) {
   const training = api.training.getTrainingExercises.useQuery({ userId: sessionData?.user.id, trainingDay });
   console.log(training.data)
 
-  const toggleState = (key: keyof StateType, id: string) => {
+  const toggleState = async (key: keyof StateType, id: string) => {
     setState((prevState) => ({
       ...prevState,
       [key]: id,
     }));
+    await exercises.refetch()
   };
 
   const handleCreateExerciseTraining = async (id: string,) => {

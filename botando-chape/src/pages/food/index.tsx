@@ -86,7 +86,7 @@ export default function Food() {
     <>
       <div className="flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-row items-center justify-between p-4">
-          <table className="mt-2 table-auto border-collapse ">
+          <table className="mt-2 table-auto border-collapse responsive-table">
             <thead className="text-center">
               <tr>
                 <th className="px-10 py-2 text-lg font-medium">

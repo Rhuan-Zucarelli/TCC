@@ -33,11 +33,12 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
 
   const meal = api.meal.getMealfood.useQuery({ userId: sessionData?.user.id, mealType, dateMeal: data.toISOString() });
 
-  const toggleState = (key: keyof StateType, id: string) => {
+  const toggleState = async (key: keyof StateType, id: string) => {
     setState((prevState) => ({
       ...prevState,
       [key]: id,
     }));
+    await foods.refetch()
   };
 
   const handleCreateMealFood = async (id: string,) => {
@@ -88,13 +89,11 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
           {meal.data?.mealFood.map((food) => (
             <div
               key={food.id}
-              className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100"
-            >
+              className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100">
               <p className="mr-2">{food.name}</p>
               <button
                 onClick={() => handleDeleteMealFood(food.id)}
-                className="ml-auto p-1 bg-green-600 text-white rounded-full transition-transform transform scale-110"
-              >
+                className="ml-auto text-green-600 p-1 bg-green-600 text-white rounded-full transition-transform transform scale-110">
                 <IoIosAddCircleOutline />
               </button>
             </div>
@@ -102,13 +101,11 @@ export default function ListFood({ type, mealType }: IcreatedBy) {
           {meal.data?.restFood.map((food) => (
             <div
               key={food.id}
-              className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100"
-            >
+              className="flex items-center border-b border-gray-300 py-2 transition-all hover:bg-gray-100">
               <p className="mr-2">{food.name}</p>
               <button
                 onClick={() => handleCreateMealFood(food.id)}
-                className="ml-auto text-green-600 p-1 hover-bg-green-600 hover-text-white rounded-full transition-transform transform hover:scale-110"
-              >
+                className="ml-auto text-green-600 p-1 hover:bg-green-600 hover:text-white rounded-full transition-transform transform hover:scale-110">
                 <IoIosAddCircleOutline />
               </button>
             </div>
